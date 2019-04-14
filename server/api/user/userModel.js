@@ -9,13 +9,13 @@ var UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+   // required: true,
     unique: true
   },
   data: {
     name: {
       type: String,
-      required: true,
+     // required: true,
       unique: true
     }
   }

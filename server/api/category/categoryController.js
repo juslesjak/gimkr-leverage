@@ -22,8 +22,8 @@ exports.get = function(req, res, next) {
   .then(function(categories){
     res.send(categories);
   }, function(err) {
-    next(err);
-  })
+      next(err);
+  });
 }
 
 exports.getOne = function(req, res, next) {
