@@ -10,4 +10,4 @@ var setMiddleware = function(app) {
     app.use(cors());
 }
 
-module.exports(setMiddleware);
+module.exports = setMiddleware;
