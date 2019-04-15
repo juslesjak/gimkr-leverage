@@ -4,12 +4,15 @@ var _ = require('lodash');
 // finds the category and attaches it to res. object 
 // if the :id param was given in query
 exports.param = function(req, res, next, id) {
-  Category.findOne(id)
+  
+  // localhost:3000/api/categories/349673946739847639486
+  Category.findById(id)
   .then(function(category) {
     if(!category) {
     next(new Error('No category found with this id'));
     } else {
-    res.category = category;
+    req.category = category;
+    console.log("TOLE JE DOC K GA DOBIM IZ FIND() " + category);
     next();
     }
   }, function(err) {
@@ -32,6 +35,7 @@ exports.getOne = function(req, res, next) {
 }
 
 exports.post = function(req, res, next) {
+  console.log(req.body);
   var newCategory = new Category(req.body);
   newCategory.save(function(err, saved) {
     if (err) {
@@ -43,11 +47,11 @@ exports.post = function(req, res, next) {
 };
 
 exports.put = function(req, res, next) {
-  var category = req.user;
+  var category = req.category;
   var newCategory = req.body;
 
-  _.merge(user, newCategory);
-  user.save(function(err, saved) {
+  _.merge(category, newCategory);
+  category.save(function(err, saved) {
     if(err) {
       next(err);
     } else {
@@ -57,8 +61,7 @@ exports.put = function(req, res, next) {
 };
 
 exports.delete = function(req, res, next) {
-  var category = req.category;
-  category.remove(function(err, removed) {
+  req.category.remove(function(err, removed) {
     if (err) {
       next(err);
     } else {
