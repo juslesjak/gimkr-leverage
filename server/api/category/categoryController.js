@@ -37,11 +37,11 @@ exports.getOne = function(req, res, next) {
 exports.post = function(req, res, next) {
   console.log(req.body);
   var newCategory = new Category(req.body);
-  newCategory.save(function(err, saved) {
+  newCategory.save(function(err, savedCategory) {
     if (err) {
       next(err);
     } else {
-      res.json(saved);
+      res.json(savedCategory);
     }
   });
 };

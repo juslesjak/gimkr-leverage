@@ -1,15 +1,27 @@
+var _ = require('lodash');
+
 var config = {
     dev: 'development',
     prod: 'production',
-    test: 'test',
+    test: 'testing',
     port: process.env.PORT || 3000,
-    db: {
-      url: 'mongodb://localhost/ghk-gimkr'
+    expireTime: 24 * 60 * 10,
+    secrets: {
+      jwt: process.env.JWT || 'skrivnost'
     }
-}
+};
 
 process.env.NODE_ENV = process.env.NODE_ENV || config.dev;
-
 config.env = process.env.NODE_ENV;
 
-module.exports = config
+// envConfig = configuration specific for enviroment
+var envConfig;
+
+try {
+  envConfig = require('./' + config.env);
+  envConfig = envConfig || {};
+} catch(e) {
+  envConfig = {};
+}
+
+module.exports = _.merge(config, envConfig);

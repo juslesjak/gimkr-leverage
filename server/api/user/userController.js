@@ -2,6 +2,7 @@
 
 var User = require('./userModel');
 var _ = require('lodash');
+var signToken = require('../../auth/auth').signToken;
 
 // get :id from url query
 exports.params = function(req, res, next, id) {
@@ -35,22 +36,32 @@ exports.getOne = function(req, res, next) {
 exports.post = function(req, res, next) {
   var newUser = new User(req.body)
 
-  newUser.save(function(err, saved) {
+  newUser.save(function(err, savedUser) {
     if (err) {
       next(err);
     } else {
       // kle rabs se dodelit auth token in mu ga nazaj vrnt namest celga saved objecta.
-      res.json(saved);
+      var token = signToken(savedUser.id);
+      res.json({token: token});
     }
   });
 };
 
-exports.put = function(req, res, next, id) {
+exports.put = function(req, res, next) {
   var user = req.user;
   var update = req.body;
 
+  // oba sta undefined
+  // zbrije jih checkUser
+  console.log("TOLE JE REQ.USER: " + user);
+  console.log("TOLE JE REQ.BODY: " + update);
+
+
   // merge the updated object onto user
   _.merge(user, update);
+
+  //tuki je user undefined
+  // console.log("TOLE JE UPDATED USER: " + user);
 
   // update db
   user.save(function(err, saved) {
