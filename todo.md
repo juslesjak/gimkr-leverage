@@ -81,8 +81,6 @@ file-i bi mogl bit v delujočem stanju: vsi pathi so zvezani. ✔️
       -> verifyUser() a sploh obstaja in preveri password✔️
       -> controller.signin dodeli token glede na user id in ga vrne v res userju da ga naprej lah uporabla✔️
 
-*got denied the summer intership, ker "smo pri nas principelni". congratulations you just played yourself*
-
       -> finish auth.js✔️
 
 -> congif.js and nitty gritty connection stuff

@@ -8,9 +8,6 @@ var info = function() {
 
 var checkUser = [auth.decodeToken(), auth.getFreshUser()];
 
-
-
-
 var router = require('express').Router();
 var controller = require('./userController');
 
