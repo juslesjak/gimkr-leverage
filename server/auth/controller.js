@@ -1,6 +1,7 @@
-var signToken = require('./auth').signToken;
+var passport = require('passport');
 
-exports.signin = function(req, res, next) {
-  var token = signToken(req.user._id);
-  res.json(token);
+//to gre v auth.js
+exports.google = function(req, res, next) {
+    // passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] });
+    passport.authenticate('google', { falieureRedirect: '/login.html', session: false }); // google strategy je v passport.use(auth)
 }

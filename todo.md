@@ -56,7 +56,7 @@ file-i bi mogl bit v delujočem stanju: vsi pathi so zvezani. ✔️
     -> Cannot read property 'remove' of undefined (toj blo brez narekovajev)✔️ (problem rešen spodi)
 
   -> **SEPRAV** exports.param() je middleware. torej, ko v DB najde kategorijo/userja glede na id, ga appenda
-  na **req**.category, nepa na **res**.category. ko klice next(), je naslednjem middlewaru dosegjivo to na 
+  na **req**, nepa na **res**.category. ko klice next(), je naslednjem middlewaru dosegjivo to na 
   req.category, ko končni middleware opravi svoje je pa šele res.karkoli✔️
 
 -> POST http://localhost:3000/api/categories/, v request body sm dou (key: name, value: "novaKategorija")
@@ -99,3 +99,47 @@ file-i bi mogl bit v delujočem stanju: vsi pathi so zvezani. ✔️
     -> invalid signature se zmeram (kokr prej k se secret ni ujemou k sm ga umes spremenu)
 
 
+## 24/4/2019
+
+-> Passport.js with OAuth with Google account.
+    -> secure CRUD paths
+-> Frontend skeleton
+
+##26/4/2019
+
+-> register at google API cloud, get clientID and clientSecret,️️✔️
+
+-> auth: passport.use(googleStrategy)
+    -> async response (profile) // kar dobiš v profil e se nastavi v google devs cloudu✔️
+        -> ime, emails, id,.. // to rabs za application userja, seprav za server
+    
+    -> [/auth/routers] router.route('/oauth/google')✔️
+                                        .post(passport.authenticate('googleToken', session: {false}))
+
+
+    to se zgodi ob post requestu na tist path-
+        -> najprej poklice strategy googleToken (prever userja, po potrebi nardi novga)✔️
+
+    -> za testiranje: google oauth playground, avtoriziraš en račun da dobiš podatke iz njega, ✔️
+    dobiš access_token in ga vstaviš v headerje POST requesta na /oauth/google✔️
+        -> to vse zrihtam, poj pa dobim request timeout. s curl -X POST ne dobim nicesar nazaj (mogu bi user profile od google auth)❌
+
+        -> ta response rabm ker je notr google user id k ga rabm za ustvart userja v userModel
+    
+    -> dokler tole opravlam je cel userCrud zjeban❌
+
+    
+## 28/4/2019
+
+[google oauth]
+
+-> POST /oauth/google, req.body{ "access_token": oauth playground token}
+    -> ne nardi userja❌
+    -> passport response vrne samo POST /oauth/google - - ms - -, namest full user profile :(
+
+**reorganize AUTH**
+-> [auth.js] passport.use('googleStrategy', new googlestrategy: clientid, secret, callback, verify) //TO BO MIDDLEWARE
+-> [server.js] app.get(/oauth/google, (middleware) passport.authenticate('googleStrategy')) //tale pa poklice zgornji middleware in pol si redirectan na callback url:
+    app.get('/oauth/google/callbackUrl, passport.authenticate('googleStrategy')) 
+        **PAZI TO.** tle bi ratov infinite loop, sam ko google oauth posle GET na callback, 
+        vkljuc parameter ?code=nekinekineki. ko googleStrategy zazna ta parameter, ve, da nerab seeny delat authorizationa in prevede "code" v user data. to je za primere k bi kdo kr direkt hotu direkt do callbacka dostopat.

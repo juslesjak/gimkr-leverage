@@ -1,12 +1,9 @@
-var auth = require('../../auth/auth');
 var info = function() {
   return function(req, res, next) {
     console.log("REQ:BODY: " + req.body);
     next();
   }
 }
-
-var checkUser = [auth.decodeToken(), auth.getFreshUser()];
 
 var router = require('express').Router();
 var controller = require('./userController');
@@ -21,7 +18,7 @@ router.route('/')
 
 router.route('/:id')
   .get(controller.getOne)
-  .put(checkUser, controller.put)
-  .delete(checkUser, controller.delete)
+  .put(controller.put)
+  .delete(controller.delete)
 
 module.exports = router;

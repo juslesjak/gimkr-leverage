@@ -1,69 +1,98 @@
 var User = require('../api/user/userModel');
-var jwt = require('jsonwebtoken');
-var expressJwt = require('express-jwt');
 var config = require('../config/config');
+var passport = require('passport');
+var googlePlusTokenStrategy = require('passport-google-plus-token');
 
-// scene k jih ne razumem:
-var checkToken = expressJwt({ secret: 'blablabla' });
 
-exports.decodeToken = function() {
-  return function(req, res, next) {
-  // ckeck if token was in query string and
-  // place it on the req.headers.authorization header
+// check login: local or google
 
-  if (req.query && req.query.hasOwnProperty('access_token')) {
-    req.headers.authorization =  'Bearer ' + req.query.access_token; 
-  }
 
-  checkToken(req, res, next);
-  };
-};
+// google strategy
 
-exports.getFreshUser = function() {
-  return function(req, res, next) {
-    User.findById(req.user._id)
-      .then(function(user) {
-        if (!user) {
-          res.status(401).send('Unauthorized');
-        } else {
-          req.user = user;
-          next();
-        }
-      }, function(err) {
-        next(err);
-      })
-  };
-};
+passport.use('googleToken', new GooglePlusTokenStrategy({
+    clientID: config.oauth.google.clientID,
+    clientSecret: config.oauth.google.clientSecret,
+    callbackURL: 'http://localhost:3000/auth/google/callback', // a se ne klice to pol rekurzivno samga sebe
+  }, async (req, accessToken, refreshToken, profile, cb) => {
 
-exports.verifyUser = function() {
-  return function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
+    console.log('authenticated with google');
+      // Could get accessed in two ways:
+      // 1) When registering for the first time
+      // 2) When linking account to the existing one
     
-    if (!username || !password) {
-      res.status(400).send("Username and password required");
-      return;
-    }
+    // Should have full user profile over here
+    console.log('profile', profile);
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
 
-    User.findOne({username: username})
-      .then(function(user) {
-        if (!user) {
-          next(new Error("User not found"));
-        } else {
-          // check password
-          if (!user.authenticate(password)) {
-            next(new Error("Wrong password"));
-          } else {
-            req.user = user;
-            next();
-          }
-        }
-      }, function(err) {
-        next(err);
-      })
-  };
-};
+    return cb(null, profile);
+  }));
 
-exports.signToken = function(id) {
-  return jwt.sign({_id: id}, config.secrets.jwt, {expiresInMinutes: config.expireTime}); // dopolni config file!
-};
+
+
+// // scene k jih ne razumem:
+// var checkToken = expressJwt({ secret: 'blablabla' });
+
+// exports.decodeToken = function() {
+//   return function(req, res, next) {
+//   // ckeck if token was in query string and
+//   // place it on the req.headers.authorization header
+
+//   if (req.query && req.query.hasOwnProperty('access_token')) {
+//     req.headers.authorization =  'Token ' + req.query.access_token; 
+//   }
+
+//   checkToken(req, res, next);
+//   };
+// };
+
+// // toj blo v JWT k si jim dodeljevou tokene. zdej je drgac.
+
+// exports.getFreshUser = function() {
+//   return function(req, res, next) {
+//     User.findById(req.user._id)
+//       .then(function(user) {
+//         if (!user) {
+//           res.status(401).send('Unauthorized');
+//         } else {
+//           req.user = user;
+//           next();
+//         }
+//       }, function(err) {
+//         next(err);
+//       })
+//   };
+// };
+
+// exports.verifyUser = function() {
+//   return function(req, res, next) {
+//     var username = req.body.username;
+//     var password = req.body.password;
+    
+//     if (!username || !password) {
+//       res.status(400).send("Username and password required");
+//       return;
+//     }
+
+//     User.findOne({username: username})
+//       .then(function(user) {
+//         if (!user) {
+//           next(new Error("User not found"));
+//         } else {
+//           // check password
+//           if (!user.authenticate(password)) {
+//             next(new Error("Wrong password"));
+//           } else {
+//             req.user = user;
+//             next();
+//           }
+//         }
+//       }, function(err) {
+//         next(err);
+//       })
+//   };
+// };
+
+// exports.signToken = function(id) {
+//   return jwt.sign({_id: id}, config.secrets.jwt, {expiresInMinutes: config.expireTime}); // dopolni config file!
+// };

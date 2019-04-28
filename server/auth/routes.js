@@ -1,7 +1,8 @@
 var router = require('express').Router();
 var controller = require('./controller');
-var verifyUser = require('./auth').verifyUser;
 
-router.post('/signin', verifyUser(), controller.signin);
+// check with Password.js
+router.route('/google/callback')
+    .get(controller.google);
 
 module.exports = router;

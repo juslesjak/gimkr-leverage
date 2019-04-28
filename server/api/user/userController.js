@@ -2,7 +2,6 @@
 
 var User = require('./userModel');
 var _ = require('lodash');
-var signToken = require('../../auth/auth').signToken;
 
 // get :id from url query
 exports.params = function(req, res, next, id) {
@@ -41,7 +40,7 @@ exports.post = function(req, res, next) {
       next(err);
     } else {
       // kle rabs se dodelit auth token in mu ga nazaj vrnt namest celga saved objecta.
-      var token = signToken(savedUser.id);
+      var token = 'neki+';
       res.json({token: token});
     }
   });
