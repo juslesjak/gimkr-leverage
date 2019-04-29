@@ -5,7 +5,6 @@ var UserSchema = new Schema({
   method: {
     type: String,
     enum: ['local', 'google'],
-
   },
   local: {
     username: {
@@ -29,13 +28,27 @@ var UserSchema = new Schema({
     // torej to je googlov id. moj mongo bo pa vsakmu
     // userju dou se en __id, pac ObjectId
     id: {
-
+      type: String,
+    },
+    email: {
+      type: String,
+      lowercase: true,
     }
   }
-  
 })
 
-// export the model. Instances of this model will
-// be created according to the blueprint UserSchema
-// and saved in mongoDB under collection 'user'
+// Check which method user used to sign in
+// 
+UserSchema.pre('save', async function(next) {
+  try {
+    if (this.method !== 'local') {
+      next();
+    }
+
+  } catch(error) {
+    next(error);
+  }
+} )
+
+
 module.exports = mongoose.model('user', UserSchema);

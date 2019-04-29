@@ -6,9 +6,13 @@ var config = {
     test: 'testing',
     port: process.env.PORT || 3000,
     expireTime: 24 * 60 * 10,
-    secrets: {
-      jwt: process.env.JWT || 'skrivnost'
+    oauth: {
+        google: {
+            clienID: '2285976511-mm4jb2mngdktvkq9g8l7n01n5m1m1qfp.apps.googleusercontent.com',
+            clientSecret: 'sWIJAinxYuySunMw6uVb_JV9'
+        }
     }
+
 };
 
 process.env.NODE_ENV = process.env.NODE_ENV || config.dev;
