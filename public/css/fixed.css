@@ -1,3 +1,17 @@
+.btn-primary {
+    border-radius: 2.25rem;
+}
+
+.card {
+    background-color: rgb(54, 54, 54);
+    padding-left: 0%;
+    padding-right: 0%;
+    border-radius: 0rem;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+
+}
+
 /*--- Extra Bootstrap Column Padding --*/
 [class*="col-"] {
   padding: 1rem;

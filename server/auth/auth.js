@@ -8,14 +8,14 @@ var googlePlusTokenStrategy = require('passport-google-plus-token');
 
 
 // google strategy
-
-passport.use('googleToken', new GooglePlusTokenStrategy({
+passport.use('google', new GooglePlusTokenStrategy({
     clientID: config.oauth.google.clientID,
     clientSecret: config.oauth.google.clientSecret,
     callbackURL: 'http://localhost:3000/auth/google/callback', // a se ne klice to pol rekurzivno samga sebe
   }, async (req, accessToken, refreshToken, profile, cb) => {
 
     console.log('authenticated with google');
+    console.log(profile);
       // Could get accessed in two ways:
       // 1) When registering for the first time
       // 2) When linking account to the existing one

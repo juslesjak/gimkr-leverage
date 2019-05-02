@@ -145,7 +145,24 @@ file-i bi mogl bit v delujočem stanju: vsi pathi so zvezani. ✔️
         vkljuc parameter ?code=nekinekineki. ko googleStrategy zazna ta parameter, ve, da nerab seeny delat authorizationa in prevede "code" v user data. to je za primere k bi kdo kr direkt hotu direkt do callbacka dostopat.
 --> oauth/google on oauth/google/callback mata isti middleware in isto stvar nardita, zato lah prvega spustis in je auth page kr direkt /callback
 
--> zdej ni več POST na /oauth/google z access_tokenom v body. AMPAK google vse hendla. 
-pošle se samo GET na /oaut/google, poj pa google nardi the rest.
-     -> tkoda zdej rab frontend narest, da je <a href='/oauth/google'>Log In with Google</a>
+-> zdej ni več POST na /oauth/google z access_tokenom v body. AMPAK google vse hendla. ✔️
+pošle se samo GET na /oaut/google, poj pa google nardi the rest.✔️
+     -> tkoda zdej rab frontend narest, da je <a href='/oauth/google'>Log In with Google</a> 
     -> kliknem na login w/google, me odnese na oauth/google/callback, dobim nazaj 304 not modified (stran se ni spremenila od prejsnjic k sm jo retrievov) in loading v neskoncnost.
+
+    kokr da passport nebi delou
+
+## 29 / 4 / 2019
+
+-> [FRONTEND] stegnu sm dol **MDBOTSTRAP** toolkit k ma se bolse template, zdej rabm se merge z obstojeco spletno stranjo ker je index.html in take scene podvojen.✔️
+-> oauth je TODO
+
+## 2 / 5 / 2019
+-> create basic UI for login
+    -> app.get('/') gets this:  res.sendFile(path.join(__dirname + '/public/index.html'));, is 200.. WHY??
+    -> app.get('/inside') get this:     res.sendFile(path.join(__dirname + '/public/index1.html')); is 404
+        -> looks for file in 'C:\Users\Uporabnik\Documents\CODE\Frontend\ghk-mongo\server\public\index1.html'.
+        -> correct path da ni v server ampak direkt v public, tut **404**
+
+
+-> work on oauth

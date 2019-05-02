@@ -14,12 +14,17 @@ mongoose.connect(config.db.url);
 middleware(app);
 
 // Serve static files
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
+
+
 app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+})
 
-    res.sendFile(path.join(__dirname + '/../public/index.html'));
-  })
-
+app.get('/inside', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/index1.html'));
+})
+  
 // Set up the api
 app.use('/api', api);
 

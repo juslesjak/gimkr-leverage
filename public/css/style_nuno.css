@@ -36,7 +36,7 @@ body {
 /*--------- LANDING PAGE ---------*/
 
 .home-inner {
-    background-image: url(img/computers.png);
+    background-image: url(../img/computer.jpg);
 }
 
 .caption {
