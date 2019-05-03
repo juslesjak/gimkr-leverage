@@ -162,7 +162,15 @@ pošle se samo GET na /oaut/google, poj pa google nardi the rest.✔️
     -> app.get('/') gets this:  res.sendFile(path.join(__dirname + '/public/index.html'));, is 200.. WHY??
     -> app.get('/inside') get this:     res.sendFile(path.join(__dirname + '/public/index1.html')); is 404
         -> looks for file in 'C:\Users\Uporabnik\Documents\CODE\Frontend\ghk-mongo\server\public\index1.html'.
-        -> correct path da ni v server ampak direkt v public, tut **404**
+        -> correct path da ni v server ampak direkt v public, tut **404** ✔️
+        -> mozno da mi express.static() ze sam po sebi index.html serva in da sta app.get('/') neuporaben✔️
+        -> YEP✔️
+        -> AAAARGH fucking typo, vse je kul. file se routa in servira tkole: 
+            app.get('/', function(req, res) {
+                res.sendFile(path.join(__dirname + '/../public/login.html'));
+            })
 
 
--> work on oauth
+## 3 / 5 / 2019
+-> auth
+    -> implemented googlestrategy on login page, getting no response (loading circle on browser). google login not showing up.

@@ -6,6 +6,9 @@ var oauth = require('./auth/routes');
 var mongoose = require('mongoose');
 var middleware = require('./middleware/appMiddleware')
 var path = require('path')
+var config = require('./config/config');
+var passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // Connect to mongoose
 mongoose.connect(config.db.url);
@@ -16,13 +19,33 @@ middleware(app);
 // Serve static files
 app.use(express.static('public'));
 
+// Passport strategy
+passport.use('google', new GoogleStrategy({
+    clientID: config.oauth.google.clientID,
+    clientSecret: config.oauth.google.clientSecret,
+    callbackURL: 'http://localhost:3000/auth/google/callback', // a se ne klice to pol rekurzivno samga sebe
+  }, async (req, accessToken, refreshToken, profile, cb) => {
 
+    console.log('authenticated with google');
+    console.log(profile);
+      // Could get accessed in two ways:
+      // 1) When registering for the first time
+      // 2) When linking account to the existing one
+    
+    // Should have full user profile over here
+    console.log('profile', profile);
+    console.log('accessToken', accessToken);
+    console.log('refreshToken', refreshToken);
+    return cb(null, profile);
+}));
+
+// Create endpoints
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/../public/login.html'));
 })
 
-app.get('/inside', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/index1.html'));
+app.get('/home', function(req, res) {
+    res.sendFile(path.join(__dirname + '/../public/home.html'));
 })
   
 // Set up the api

@@ -8,7 +8,7 @@ var config = {
     expireTime: 24 * 60 * 10,
     oauth: {
         google: {
-            clienID: '2285976511-mm4jb2mngdktvkq9g8l7n01n5m1m1qfp.apps.googleusercontent.com',
+            clientID: '2285976511-mm4jb2mngdktvkq9g8l7n01n5m1m1qfp.apps.googleusercontent.com',
             clientSecret: 'sWIJAinxYuySunMw6uVb_JV9'
         }
     }
