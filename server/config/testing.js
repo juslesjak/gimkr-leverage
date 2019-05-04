@@ -1,5 +1,5 @@
-modude.exports = {
+module.exports = {
   db: {
-    url: 'mongodb://localhost/ghk-gimkr'
+    url: 'mongodb://localhost/newdb'
   }
 }

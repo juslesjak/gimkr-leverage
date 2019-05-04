@@ -39,9 +39,7 @@ exports.post = function(req, res, next) {
     if (err) {
       next(err);
     } else {
-      // kle rabs se dodelit auth token in mu ga nazaj vrnt namest celga saved objecta.
-      var token = 'neki+';
-      res.json({token: token});
+      res.json(savedUser);
     }
   });
 };

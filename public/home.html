@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#home">INSIDEEEEE</a>
+                <a class="nav-link" href="#home">Išči</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#products">Profil</a>
@@ -53,10 +53,31 @@
 		 </div>
 	 </div>
 	 <div class="caption text-center">
-         <h1>Koga iščeš</h1>
-         <button class="btn btn-elegant btn-rounded btn-sm my-0" type="submit">Išči</button>
+         <h1>Koga iščeš?</h1>
+        <!-- Search by name form -->
+        <div class="md-form mt-0 col-sm-6">
+            <input class="form-control" type="text" id="nameinput" onkeydown="search(this)" placeholder="Ime" aria-label="Search">
+        </div>
+        <!-- Search by category form -->
+        <div class="md-form mt-0 col-sm-6">
+            <input class="form-control" type="text" placeholder="Področje" aria-label="Search">
+        </div>
 
      </div>
+
+     <script>
+        function search(elem) {
+            if(event.key === 'Enter') {
+                console.log(elem.value);
+                fetch('api/users/' + elem.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                    .catch(error => console.log(error))
+            }
+        }
+     </script>
 		<!--- End Landing Page Section-->
 	<!--- End Home Section -->
 
@@ -65,7 +86,6 @@
 		<div class="row welcome text-center">
 			<div class="col-12">
                 <h3 class="heading white-text">"...brez vode ni vodke..."</h3>
-                <hr>
 				<div class="heading-underline"></div> 
 			</div>
 		</div>

@@ -174,3 +174,17 @@ pošle se samo GET na /oaut/google, poj pa google nardi the rest.✔️
 ## 3 / 5 / 2019
 -> auth
     -> implemented googlestrategy on login page, getting no response (loading circle on browser). google login not showing up.
+        -> zato ker app is running on private IP (localhost). for google oauth to work, it must run on public IP
+
+-> front to back connection:
+    -> REACT?
+    -> search users / categories (te dva mata različne onclick funkcije, čeprov sta iz istiga category fielda) nazačetk bi bla lah 2 različna
+    -> create profile form to save the user to DB (id, email, appData {name, category}) // ta ID pride iz responsa od googla, pomoje se ga rab za neke session cookije pol k jih bom implementov (to zaenkrat še ni potrebno.)
+
+-> MONGO DUPLICATE KEY ERROR: v UserSchema je biu **COMMENTAN** en property local: { username: { blabla}} in ga je mongoose
+upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", torej sm dobu duplicate key error✔️✔️✔️
+-> zdej se grem ubit v miru :) ✔️✔️✔️✔️✔️✔️
+
+## 4 / 5 / 2019
+-> add createNewUser / Edit User frontend page
+-> start React frontend to generate cards for users searched from user search on ladning page
