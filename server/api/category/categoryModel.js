@@ -6,7 +6,17 @@ var CategorySchema = new Schema({
     type: String,
     // required: true,
     unique: true
-  }
+  },
+    // link via objectIds
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: 'user',
+    required: true
+  }]
 })
 
 module.exports = mongoose.model('category', CategorySchema);
+
+
+// type: Schema.Types.ObjectId,
+// ref: 'user',

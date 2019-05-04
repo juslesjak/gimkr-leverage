@@ -44,12 +44,12 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/../public/login.html'));
 })
 
-app.get('/home', function(req, res) {
+app.get('/brskaj', function(req, res) {
     res.sendFile(path.join(__dirname + '/../public/home.html'));
 })
 
-app.get('/login', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/login.html'));
+app.get('/profil/uredi', function(req, res) {
+    res.sendFile(path.join(__dirname + '/../public/editUser.html'));
 })
   
 // Set up the api

@@ -3,23 +3,30 @@
 var User = require('./userModel');
 var _ = require('lodash');
 
-// get :id from url query
-exports.params = function(req, res, next, id) {
-  User.findById(id)
-  .then(function(user) {
-    if (!user) {
-      next(new Error('No user found with this id'))
-    } else {
-      req.user = user;
-      next();
-    }
-  }, function(err) {
-    next(err);
-  })
-}
+// get :data.name from url query
+exports.params = function(req, res, next, name) {
+    User.findOne({"data.name": name})
+    .populate({
+        path: 'data.categories',
+    })
+        .then(function(user) {
+      if (!user) {
+        console.log('no user found :(');
+        next(new Error('No user found with this name'))
+      } else {
+        req.user = user;
+        next();
+      }
+    }, function(err) {
+      next(err);
+    })
+  }
 
 exports.get = function(req, res, next) {
   User.find({})
+  .populate({
+    path: 'data.categories',
+})
   .then(function(users){
     res.send(users);
   }, function(err) {

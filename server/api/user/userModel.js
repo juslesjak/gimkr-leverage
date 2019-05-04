@@ -2,15 +2,29 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  google: {
-    id: {
-      type: String,
+    data: {
+        name: {
+          type: String,
+          required: true
+        },
+
+        // link via objectIds
+        categories: {
+          type: Schema.Types.ObjectId,
+          ref: 'category',
+          required: true
+        }
     },
-    email: {
-      type: String,
-      lowercase: true,
+
+    google: {
+        id: {
+            type: String,
+        },
+        email: {
+            type: String,
+            lowercase: true,
+        }
     }
-  }
 })
 
 // Check which method user used to sign in

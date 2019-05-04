@@ -185,6 +185,8 @@ pošle se samo GET na /oaut/google, poj pa google nardi the rest.✔️
 upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", torej sm dobu duplicate key error✔️✔️✔️
 -> zdej se grem ubit v miru :) ✔️✔️✔️✔️✔️✔️
 
-## 4 / 5 / 2019
--> add createNewUser / Edit User frontend page
+## 4 / 5 / 2019 ž+
+-> connect categories with users and vice versa (prepare for frontend querying)✔️
+-> add createNewUser / Edit User frontend page ❌
 -> start React frontend to generate cards for users searched from user search on ladning page
+    -> working with vanilla javascript✔️

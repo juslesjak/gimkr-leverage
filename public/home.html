@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-	<title>GIMKR HUSSLE CLUB</title>
+	<title>GKH</title>
 	<link rel="stylesheet" href="css/style_nuno.css" type="text/css">
     <link rel="stylesheet" href="css/fixed.css" type="text/css">
      <!-- Font Awesome -->
@@ -31,10 +31,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" href="#home">Išči</a>
+                <a class="nav-link" href="/brskaj">Brskaj</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#products">Profil</a>
+                <a class="nav-link" href="#products">Moj Profil</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#products">Odjava</a>
@@ -56,29 +56,66 @@
          <h1>Koga iščeš?</h1>
         <!-- Search by name form -->
         <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" id="nameinput" onkeydown="search(this)" placeholder="Ime" aria-label="Search">
+            <input class="form-control" type="text" id="nameinput" onkeydown="searchUser(this)" placeholder="Ime" aria-label="Search">
         </div>
         <!-- Search by category form -->
         <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" placeholder="Področje" aria-label="Search">
+            <input class="form-control" type="text" placeholder="Področje" onkeydown="searchCategory(this)" aria-label="Search">
         </div>
 
      </div>
 
      <script>
-        function search(elem) {
+        function searchUser(elem) {
             if(event.key === 'Enter') {
-                console.log(elem.value);
-                fetch('api/users/' + elem.value)
+                // slice user query to render for query
+                var query = elem.value.replace(/ /g, '%20');
+                var uri = 'api/users/' + query;
+                fetch(uri)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
+                        // find only the card of the searched user. 
+                        // do not create a new card (or create a new card with all proper data)
+                        document.getElementById("gridOfLegends").innerHTML = document.getElementById("cardOfALegend").innerHTML;
+                        document.getElementById("nameOfLegend").innerHTML = data.data.name;
+                        console.log(data.data.categories)
+                    })
+                    .catch(error => console.log(error))
+            }
+        };
+
+        function searchCategory(elem) {
+            if(event.key === 'Enter') {
+                var uri = 'api/categories/' + elem.value;
+                fetch(uri)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.data.categories)
                     })
                     .catch(error => console.log(error))
             }
         }
      </script>
-		<!--- End Landing Page Section-->
+
+     <!--------template za user search card ------->
+     <script id="cardOfALegend" type="text/html">
+        
+		<div class="row padding" id="updatedGridOfLegends">
+            <div class="col-md-12">
+                <div class="card view overlay zoom">
+                    <img class="card-img-top img-fluid" src="img/aljaz.png" alt="{{profile.name, profile.caegory}}">
+                    <div class="mask flex-center rgba-red-strong">
+                        <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     </script>
+
+    <!--- template za category search cards. kle more za vsako v arrayu najdenih postat. to bo React--> 
+
+    <!--- End Landing Page Section-->
 	<!--- End Home Section -->
 
 	<!-------- Start Grid Section --------->
@@ -93,12 +130,12 @@
 
 	<!--- Cards -->
 	<div class="container-fluid padding">
-		<div class="row padding">
+		<div class="row padding" id="gridOfLegends">
 			<div class="col-md-4">
 				<div class="card view overlay zoom">
 					<img class="card-img-top img-fluid" src="img/aljaz.png" alt="{{profile.name, profile.caegory}}">
                     <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Luka Grašič</h1>
+                        <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
                     </div>
 				</div>
             </div>
