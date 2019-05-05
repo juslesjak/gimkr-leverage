@@ -78,6 +78,8 @@
                         // do not create a new card (or create a new card with all proper data)
                         document.getElementById("gridOfLegends").innerHTML = document.getElementById("cardOfALegend").innerHTML;
                         document.getElementById("nameOfLegend").innerHTML = data.data.name;
+                        document.getElementById("legendRedirect").setAttribute("href", query)
+
                         console.log(data.data.categories)
                     })
                     .catch(error => console.log(error))
@@ -90,7 +92,20 @@
                 fetch(uri)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data.data.categories)
+                        var users = data.users; //[]
+                        var gridOfLegends = document.getElementById("gridOfLegends");
+                        // empty grid
+                        while (gridOfLegends.firstChild) {
+                            gridOfLegends.removeChild(gridOfLegends.firstChild);
+                        }
+                        // fill grid. TOLE JE PA SFUKANO LOL
+                        var cardOfALegend = document.getElementById("cardOfALegend").innerHTML;
+                        for (i = 0; i < users.length; i++) {
+                            document.getElementById("nameOfLegend").innerHTML = 'JUS LESJAAAK';
+                            gridOfLegends.innerHTML = cardOfALegend;
+
+                        }
+                        console.log(data.users)
                     })
                     .catch(error => console.log(error))
             }
@@ -101,14 +116,16 @@
      <script id="cardOfALegend" type="text/html">
         
 		<div class="row padding" id="updatedGridOfLegends">
-            <div class="col-md-12">
-                <div class="card view overlay zoom">
-                    <img class="card-img-top img-fluid" src="img/aljaz.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+            <a id="legendRedirect" href="#">
+                <div class="col-md-12">
+                    <div class="card view overlay zoom">
+                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <div class="mask flex-center rgba-red-strong">
+                            <h1 class="white-text" id="nameOfLegend">Luka Osojnik</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>    
         </div>
 
      </script>
@@ -131,58 +148,100 @@
 	<!--- Cards -->
 	<div class="container-fluid padding">
 		<div class="row padding" id="gridOfLegends">
-			<div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/aljaz.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+            <div class="col-md-4">
+                <a href="/Luka%20Grasic">
+                    <div class="card view overlay zoom">
+                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <div class="mask flex-center rgba-red-strong">
+                            <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+                        </div>
                     </div>
-				</div>
+                </a>
             </div>
             <div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/jaka.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Juš Lesjak</h1>
+                <a href="/Jus%20Lesjak">
+                    <div class="card view overlay zoom">
+                        <img class="card-img-top img-fluid" src="img/jaka.png">
+                        <div class="mask flex-center rgba-red-strong">
+                            <h1 id="nameOfLegend" class="white-text">Juš Lesjak</h1>
+                        </div>
                     </div>
-				</div>
+                </a>
             </div>
             <div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/apple.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Nejc Draksler</h1>
+                <a href="/Tjaz%20Erzen">
+                    <div class="card view overlay zoom">
+                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <div class="mask flex-center rgba-red-strong">
+                            <h1 id="nameOfLegend" class="white-text">Tjaž Eržen</h1>
+                        </div>
                     </div>
-				</div>
+                </a>
             </div>
             <div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/jaka.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Janja Lesjak</h1>
+                <a href="/Janja%20Lesjak">
+                    <div class="card view overlay zoom">
+                        <img class="card-img-top img-fluid" src="img/jaka.png">
+                        <div class="mask flex-center rgba-red-strong">
+                            <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                        </div>
                     </div>
-				</div>
+                </a>
             </div>
             <div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/apple.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Tjaž Eržen</h1>
-                    </div>
-				</div>
-            </div>
-            <div class="col-md-4">
-				<div class="card view overlay zoom">
-					<img class="card-img-top img-fluid" src="img/jaka.png" alt="{{profile.name, profile.caegory}}">
-                    <div class="mask flex-center rgba-red-strong">
-                        <h1 class="white-text">Gašper Lotrič</h1>
-                    </div>
-				</div>
-            </div>
-		</div>
+                    <a href="/Luka%20Grasic">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Jus%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/jaka.png">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Juš Lesjak</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Tjaz%20Erzen">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Tjaž Eržen</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/jaka.png">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        </div>
 	</div>
 
-	<!-------- End Team Section --------->
+	<!-------- End Grid Section --------->
 
 	<!-------- Start Contact Section --------->
 	<!-------- End Contact Section --------->

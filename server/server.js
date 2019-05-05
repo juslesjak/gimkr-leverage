@@ -9,6 +9,7 @@ var path = require('path')
 var config = require('./config/config');
 var passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+var ui = require('./ui/uiRoutes');
 
 // Connect to mongoose
 mongoose.connect(config.db.url);
@@ -19,7 +20,7 @@ middleware(app);
 // Serve static files
 app.use(express.static('public'));
 
-// Passport strategy
+// Passport strategy. Dela samo na public IP Addressih
 passport.use('google', new GoogleStrategy({
     clientID: config.oauth.google.clientID,
     clientSecret: config.oauth.google.clientSecret,
@@ -38,25 +39,15 @@ passport.use('google', new GoogleStrategy({
     console.log('refreshToken', refreshToken);
     return cb(null, profile);
 }));
-
-// Create endpoints
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/login.html'));
-})
-
-app.get('/brskaj', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/home.html'));
-})
-
-app.get('/profil/uredi', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/editUser.html'));
-})
   
 // Set up the api
 app.use('/api', api);
 
-// sm gor prides s klikom na <a href='/oauth/google'>Log In with Google</a>
+// sm gor prides s klikom na <a href='/oauth/google'>Log In with Google</a> iz UI
 app.use('/oauth', oauth);
+
+// Set up UI
+app.use('/', ui);
 
 module.exports = app;
 
