@@ -11,7 +11,7 @@ exports.params = function(req, res, next, name) {
         .then(function(user) {
       if (!user) {
         console.log('no user found :(');
-        next(new Error('No user found with this name'))
+        next(new Error('No user found with this name: ' + typeof(name)))
       } else {
         req.user = user;
         next();
@@ -33,8 +33,8 @@ exports.getOne = function(req, res) {
     res.sendFile(path.join(__dirname + '/../../public/profile.html'));
 }
 
-exports.post = function(req, res, next) {
-
+exports.postUser = function(req, res, next) {
+    res.sendFile(path.join(__dirname + '/../../public/profileCreate.html'));
 };
 
 exports.put = function(req, res, next) {

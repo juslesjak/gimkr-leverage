@@ -7,14 +7,13 @@
 
 	<title>GKH</title>
 	<link rel="stylesheet" href="css/style_nuno.css" type="text/css">
-    <link rel="stylesheet" href="css/fixed.css" type="text/css">
      <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
+    <!-- Your custom styles -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
@@ -56,60 +55,17 @@
          <h1>Koga iščeš?</h1>
         <!-- Search by name form -->
         <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" id="nameinput" onkeydown="searchUser(this)" placeholder="Ime" aria-label="Search">
+            <input class="form-control" type="text" id="nameSearch" placeholder="Ime" aria-label="Search">
         </div>
         <!-- Search by category form -->
         <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" placeholder="Področje" onkeydown="searchCategory(this)" aria-label="Search">
+            <input class="form-control" type="text" id="categorySearch" placeholder="Področje" aria-label="Search">
         </div>
 
      </div>
 
      <script>
-        function searchUser(elem) {
-            if(event.key === 'Enter') {
-                // slice user query to render for query
-                var query = elem.value.replace(/ /g, '%20');
-                var uri = 'api/users/' + query;
-                fetch(uri)
-                    .then(response => response.json())
-                    .then(data => {
-                        // find only the card of the searched user. 
-                        // do not create a new card (or create a new card with all proper data)
-                        document.getElementById("gridOfLegends").innerHTML = document.getElementById("cardOfALegend").innerHTML;
-                        document.getElementById("nameOfLegend").innerHTML = data.data.name;
-                        document.getElementById("legendRedirect").setAttribute("href", query)
-
-                        console.log(data.data.categories)
-                    })
-                    .catch(error => console.log(error))
-            }
-        };
-
-        function searchCategory(elem) {
-            if(event.key === 'Enter') {
-                var uri = 'api/categories/' + elem.value;
-                fetch(uri)
-                    .then(response => response.json())
-                    .then(data => {
-                        var users = data.users; //[]
-                        var gridOfLegends = document.getElementById("gridOfLegends");
-                        // empty grid
-                        while (gridOfLegends.firstChild) {
-                            gridOfLegends.removeChild(gridOfLegends.firstChild);
-                        }
-                        // fill grid. TOLE JE PA SFUKANO LOL
-                        var cardOfALegend = document.getElementById("cardOfALegend").innerHTML;
-                        for (i = 0; i < users.length; i++) {
-                            document.getElementById("nameOfLegend").innerHTML = 'JUS LESJAAAK';
-                            gridOfLegends.innerHTML = cardOfALegend;
-
-                        }
-                        console.log(data.users)
-                    })
-                    .catch(error => console.log(error))
-            }
-        }
+        
      </script>
 
      <!--------template za user search card ------->
@@ -121,7 +77,7 @@
                     <div class="card view overlay zoom">
                         <img class="card-img-top img-fluid" src="img/aljaz.png">
                         <div class="mask flex-center rgba-red-strong">
-                            <h1 class="white-text" id="nameOfLegend">Luka Osojnik</h1>
+                            <h1 class="white-text" id="nameOfLegend"></h1>
                         </div>
                     </div>
                 </div>
@@ -256,6 +212,8 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+    <!-- Scripts -->
+    <script src="js/ui/ui.js"></script>
 
 
 </body>

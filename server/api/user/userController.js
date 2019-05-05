@@ -12,7 +12,7 @@ exports.params = function(req, res, next, name) {
         .then(function(user) {
       if (!user) {
         console.log('no user found :(');
-        next(new Error('No user found with this name'))
+        next(new Error('No user found with this name: ' + typeof(name)))
       } else {
         req.user = user;
         next();

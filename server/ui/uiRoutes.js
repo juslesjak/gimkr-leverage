@@ -13,6 +13,9 @@ router.route('/')
 router.route('/brskaj')
     .get(controller.getHome)
 
+router.route('/ustvari')
+    .get(controller.postUser)
+
 router.route('/:username')
   .get(controller.getOne)
   .put(controller.put)

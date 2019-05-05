@@ -192,5 +192,6 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 
 ## 5 / 5 / 2019
 -> querying & routing users&categories concern: ščćž (regex to change for urls to english) ❌❌
+-> research UI guidlines ❗❗❗
 -> add createNewUser / Edit User frontend page (/Jus%20Lesjak/uredi) (link za to se pokaže na profil strani ČE je logged in user isti kokr profil k ga gleda?)
     -> reorganize all UI into separate part of server✔️

@@ -5,7 +5,6 @@ var config = require('./config/config');
 var oauth = require('./auth/routes');
 var mongoose = require('mongoose');
 var middleware = require('./middleware/appMiddleware')
-var path = require('path')
 var config = require('./config/config');
 var passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
