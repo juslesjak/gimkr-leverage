@@ -23,20 +23,20 @@
         <div class="header">
             <h1>Ustvari profil</h1>
         </div>
-            <form id="newUserForm">
+            <form id="newUserForm" name="newUserForm">
                 <div class="form-row mb-4">
                     <div class="col">
                         <!-- First name -->
-                        <input type="text" id="legendName" class="form-control" placeholder="Ime">
+                        <input type="text" id="newFirst" name="first" class="form-control" placeholder="Ime">
                     </div>
                     <div class="col">
                         <!-- Last name -->
-                        <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Priimek">
+                        <input type="text" id="newLast" name="last" class="form-control" placeholder="Priimek">
                     </div>
                 </div>
                 <div class="col-12">
                     <!-- Categories -->
-                    <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Področja">
+                    <input type="text" id="newCategories" name="categories" class="form-control" placeholder="Področja">
                 </div>
                 <input type="submit" value="Ustvari profil">
             </form>
@@ -58,7 +58,6 @@
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
     <!-- Scripts -->
     <script src="js/ui/ui.js"></script>
-
 
 </body>
 </html>

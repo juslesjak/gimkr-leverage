@@ -12,6 +12,8 @@ if(document.getElementById('nameSearch')) {
 
 }
 
+// SEARCH EXISTING USER
+
 function searchUser() {
     if(event.key === 'Enter') {
         // slice user query to render for query
@@ -20,7 +22,7 @@ function searchUser() {
         fetch(uri)
             .then(response => response.json())
             .then(data => {
-                
+
                 // create a new card with all proper data
                 document.getElementById("gridOfLegends").innerHTML = document.getElementById("cardOfALegend").innerHTML;
                 document.getElementById("nameOfLegend").innerHTML = data.data.name;
@@ -32,6 +34,8 @@ function searchUser() {
     }
 };
 
+// SEARCH EXISTING CATEGORY
+
 function searchCategory() {
     if(event.key === 'Enter') {
         var uri = 'api/categories/' + this.value;
@@ -39,55 +43,65 @@ function searchCategory() {
             .then(response => response.json())
             .then(data => {
                 var users = data.users; //[]
-                var gridOfLegends = document.getElementById("gridOfLegends");
+
                 // empty grid
+                var gridOfLegends = document.getElementById("gridOfLegends");
                 while (gridOfLegends.firstChild) {
                     gridOfLegends.removeChild(gridOfLegends.firstChild);
                 }
-                // fill grid. TOLE JE PA SFUKANO LOL
-                var cardOfALegend = document.getElementById("cardOfALegend").innerHTML;
-                for (i = 0; i < users.length; i++) {
-                    document.getElementById("nameOfLegend").innerHTML = 'JUS LESJAAAK';
-                    gridOfLegends.innerHTML = cardOfALegend;
 
+                // fill grid. TOLE JE PA SFUKANO LOL
+                for (i = 0; i < users.length; i++) {
+                    // create card with found users data
+                    var cardOfALegend = document.getElementById("cardOfALegend").innerHTML;
+                    
+                    document.getElementById("nameOfLegend").innerHTML = data.data.name;
+                    document.getElementById("legendRedirect").setAttribute("href", query)
+
+                    // Append cardOfALegend to gridOfLegends
+                    gridOfLegends.appendChild(cardOfALegend);
                 }
-                console.log(data.users)
             })
             .catch(error => console.log(error))
     }
 }
+
+// ADD NEW USER
 
 // check if on createUser page
 if(document.getElementById('newUserForm')) {
 
     // za submit rabs poslusat na <form id="nfjsrf">
     var newUserForm = document.getElementById('newUserForm')
-    var submitUpdatedUser = document.getElementById('submitUpdatedUser')
-    var test = document.getElementById('legendName')
-    test.addEventListener('keyup', testForm)
-
-    newUserForm.addEventListener('submit', testForm)
-}
-
-function testForm(elem) {
-    console.log('hit the test target')
+    newUserForm.addEventListener('submit', postUser)
 }
 
 function postUser() {
+    event.preventDefault();
+
+    // redirect se zgodi: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
     var formData = new FormData(this);
+
+    // model formData da bojo ustrezale data: formData
+
     var user = {
         data: {
-            name: formData.data.name,
-            categories: formData.data.categories 
+            name: "Testfrom Front",
+            categories: "5ccddebfb94654349067fd04"
         },
         google: {
-            id: formData.google.id,
-            email: formData.google.email
+            id: 'googleidblabal', //formData.google.id,
+            email: 'user.email@gmail.com' //formData.google.email
         }
     }
-
     console.log(user);
-    // $.post('/api/users', user)
+    $.post('/api/users', user)
+
 }
+
+
+
+// update user
+//     var submitUpdatedUser = document.getElementById('submitUpdatedUser')
 
 

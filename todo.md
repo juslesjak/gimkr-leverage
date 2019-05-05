@@ -195,3 +195,12 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 -> research UI guidlines ❗❗❗
 -> add createNewUser / Edit User frontend page (/Jus%20Lesjak/uredi) (link za to se pokaže na profil strani ČE je logged in user isti kokr profil k ga gleda?)
     -> reorganize all UI into separate part of server✔️
+    -> postUser() in ui.js✔️
+        -> gotta preventDefault✔️
+            -> redirect na http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e se sezmer zgodi❌
+        -> formData() mi ga neki svira. ne sprocesira <form> kokr bi mogu
+            -> YOU ARE NOT SUPPOSED TO CONSOLELOG FORMDATA YOU DUMB FUCK✔️
+        -> get correcty modelled data from FormData, da ustrezajo data: formData❌
+        
+    
+    
