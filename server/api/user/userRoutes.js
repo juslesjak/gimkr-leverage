@@ -14,4 +14,12 @@ router.route('/:username')
   .put(controller.put)
   .delete(controller.delete)
 
+router.route('/test')
+    .post(function(req, res, next) {
+        console.log('recieved request ', req.body);
+
+        var data = req.user;
+        res.send(data);
+    })
+
 module.exports = router;

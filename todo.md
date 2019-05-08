@@ -201,6 +201,11 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
         -> formData() mi ga neki svira. ne sprocesira <form> kokr bi mogu
             -> YOU ARE NOT SUPPOSED TO CONSOLELOG FORMDATA YOU DUMB FUCK✔️
         -> get correcty modelled data from FormData, da ustrezajo data: formData❌
+
+## 8 / 5 / 2019
+-> formData not working, asked for help on Slack
+-> incorporate react forntend (get David on board?)
+    -> brocen the home.html to start building react component
         
     
     

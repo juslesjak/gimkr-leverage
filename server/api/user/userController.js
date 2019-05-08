@@ -12,7 +12,8 @@ exports.params = function(req, res, next, name) {
         .then(function(user) {
       if (!user) {
         console.log('no user found :(');
-        next(new Error('No user found with this name: ' + typeof(name)))
+        res.send(req.user);
+        // next(new Error('No user found with this name: ' + typeof(name)))
       } else {
         req.user = user;
         next();
@@ -21,6 +22,13 @@ exports.params = function(req, res, next, name) {
       next(err);
     })
   }
+
+exports.test = function(req, res, next) {
+    console.log('recieved request ', req.body);
+
+    var data = req.user;
+    res.send(data);
+}
 
 exports.get = function(req, res, next) {
   User.find({})

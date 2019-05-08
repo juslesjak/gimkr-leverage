@@ -79,23 +79,28 @@ if(document.getElementById('newUserForm')) {
 function postUser() {
     event.preventDefault();
 
-    // redirect se zgodi: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
+    // redirect se ne sme zgodit: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
     var formData = new FormData(this);
 
     // model formData da bojo ustrezale data: formData
 
     var user = {
         data: {
-            name: "Testfrom Front",
+            name: "user",
             categories: "5ccddebfb94654349067fd04"
         },
         google: {
-            id: 'googleidblabal', //formData.google.id,
-            email: 'user.email@gmail.com' //formData.google.email
+            id: 'useruser', //formData.google.id,
+            email: 'user.email43@gmail.com' //formData.google.email
         }
     }
-    console.log(user);
-    $.post('/api/users', user)
+    
+    // var request = new XMLHttpRequest();
+    // request.open("POST", "http://localhost:3000/api/users/test");
+    // request.setRequestHeader("Content-type", "application/json");
+    // request.send(JSON.stringify(formData));
+    
+    // $.post('/api/users', user)
 
 }
 

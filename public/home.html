@@ -50,23 +50,7 @@
 
 			 </div>
 		 </div>
-	 </div>
-	 <div class="caption text-center">
-         <h1>Koga iščeš?</h1>
-        <!-- Search by name form -->
-        <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" id="nameSearch" placeholder="Ime" aria-label="Search">
-        </div>
-        <!-- Search by category form -->
-        <div class="md-form mt-0 col-sm-6">
-            <input class="form-control" type="text" id="categorySearch" placeholder="Področje" aria-label="Search">
-        </div>
-
-     </div>
-
-     <script>
-        
-     </script>
+    </div>
 
      <!--------template za user search card ------->
      <script id="cardOfALegend" type="text/html">
@@ -89,7 +73,67 @@
     <!--- template za category search cards. kle more za vsako v arrayu najdenih postat. to bo React--> 
 
     <!--- End Landing Page Section-->
-	<!--- End Home Section -->
+    <!--- End Home Section -->
+    
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+
+     <!----- React Component --------->
+     <script type="text/babel">
+     
+     var Legends = React.createClass({
+        getInitialState: funtion() {
+                 return({
+                     // initial grid of random legends
+                     legends: []
+                 })
+        }
+
+        render: funtion() {
+            var legends = this.state.legends;
+            legends = legends.map(function(legend, i) {
+                return(
+                    // return a card of a legend
+                    // key={i} rab react iz nekih razlogov, to je property of div card
+                    <div class="row padding" id="updatedGridOfLegends">
+                        <a id="legendRedirect" href="#">
+                            <div class="col-md-12">
+                                <div class="card view overlay zoom">
+                                    <img class="card-img-top img-fluid" src={legend.object.data.img}>
+                                    <div class="mask flex-center rgba-red-strong">
+                                        <h1 class="white-text" id="nameOfLegend">{legend.object.data.name}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>    
+                    </div>
+                )
+            })
+             
+             return(
+                <div id="legend-container" class="caption text-center">
+                    <h1>Koga iščeš?</h1>
+                    // Search by name form
+                    <div class="md-form mt-0 col-sm-6">
+
+                    // namest addeventlistener v js das kle onkeyup pa react function handleSubmit()
+                    // k nardi fetch in napolne legends[] z najdenimi objekti
+                        <input class="form-control" type="text" id="nameSearch" placeholder="Ime" aria-label="Search">
+                    </div>
+                    // Search by category form
+                    <div class="md-form mt-0 col-sm-6">
+                        <input class="form-control" type="text" id="categorySearch" placeholder="Področje" aria-label="Search">
+                    </div>
+                </div>
+             );
+         }
+     })
+     
+     
+     
+     </script>
+
 
 	<!-------- Start Grid Section --------->
 	<div class="container-fluid padding bg-dark">
