@@ -8,12 +8,11 @@ var UserSchema = new Schema({
           required: true
         },
 
-        // link via objectIds
         categories: {
           type: Schema.Types.ObjectId,
           ref: 'category',
           required: true
-        }
+        },
     },
 
     google: {
@@ -28,7 +27,6 @@ var UserSchema = new Schema({
 })
 
 // Check which method user used to sign in
-// 
 UserSchema.pre('save', async function(next) {
   try {
     if (this.method !== 'local') {
@@ -40,9 +38,8 @@ UserSchema.pre('save', async function(next) {
   }
 } )
 
-
 module.exports = mongoose.model('user', UserSchema);
 
-    // ta ID dobis iz POST responsa na oauth/google
-    // torej to je googlov id. moj mongo bo pa vsakmu
-    // userju dou se en __id, pac ObjectId
+// google.id dobis iz POST responsa na oauth/google
+// torej to je googlov id. moj mongo bo pa vsakmu
+// userju dou se en __id, ObjectId

@@ -17,7 +17,7 @@ mongoose.connect(config.db.url);
 middleware(app);
 
 // Serve static files
-app.use(express.static('public'));
+app.use(express.static('client/public'));
 
 // Passport strategy. Dela samo na public IP Addressih
 passport.use('google', new GoogleStrategy({

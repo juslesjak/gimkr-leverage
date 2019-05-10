@@ -22,26 +22,28 @@ exports.params = function(req, res, next, name) {
   }
 
 exports.getLogin = function(req, res) {
-    res.sendFile(path.join(__dirname + '/../../public/login.html'));
+    res.sendFile(path.join(__dirname + '/../../client/public/login.html'));
 };
 
 exports.getHome = function(req, res) {
-    res.sendFile(path.join(__dirname + '/../../public/home.html'));
+    res.sendFile(path.join(__dirname + '/../../client/public/home.html'));
 };
 
 exports.getOne = function(req, res) {
-    res.sendFile(path.join(__dirname + '/../../public/profile.html'));
+    res.sendFile(path.join(__dirname + '/../../client/public/profile.html'));
 }
 
+// v temu filu das da posle POST na api/users
 exports.postUser = function(req, res, next) {
-    res.sendFile(path.join(__dirname + '/../../public/profileCreate.html'));
+    res.sendFile(path.join(__dirname + '/../../client/public/profileCreate.html'));
 };
 
+// v temu filu das da posle PUT na api/users/Jus%20Lesjak
 exports.put = function(req, res, next) {
-    res.sendFile(path.join(__dirname + '/../../public/profileEdit.html'));
+    res.sendFile(path.join(__dirname + '/../../client/public/profileEdit.html'));
 };
 
-// delete user from db (nothing else needed because all static files are generated sproti React)) KAJ PA SLIKE?
+// delete user from db (nothing else needed because all static files are generated sproti React))
 exports.delete = function(req, res, next) {
     res.send('kao deleted a user');
 //   var user = req.user;
@@ -54,5 +56,3 @@ exports.delete = function(req, res, next) {
 //     }
 //   });
 };
-
-
