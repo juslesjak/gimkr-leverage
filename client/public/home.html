@@ -33,10 +33,10 @@
                 <a class="nav-link" href="/brskaj">Brskaj</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#products">Moj Profil</a>
+                <a class="nav-link" href="/Jus%20Lesjak">Moj Profil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#products">Odjava</a>
+                <a class="nav-link" href="#">Odjava</a>
                 </li>
             </ul>
         </div>
@@ -44,12 +44,25 @@
 		<!--- End Navigation -->
 		
     <!--- Start Landing Page Section -->
-   <div class="landing">
-		 <div class="home-wrap">
-			 <div class="home-inner">
-
-			 </div>
-		 </div>
+    <div class="landing">
+            <div class="home-wrap">
+                <div class="home-inner">
+   
+                </div>
+            </div>
+        </div>
+        <div class="caption text-center">
+            <h1>Koga iščeš?</h1>
+           <!-- Search by name form -->
+           <div class="md-form mt-0 col-sm-3">
+               <input class="form-control search" type="text" id="nameSearch" placeholder="IME" aria-label="Search">
+           </div>
+           <!-- Search by category form -->
+           <div class="md-form mt-0 col-sm-3">
+               <input class="form-control search" type="text" id="categorySearch" placeholder="PODROČJE" aria-label="Search">
+           </div>
+   
+        </div>
     </div>
 
      <!--------template za user search card ------->
@@ -59,7 +72,7 @@
             <a id="legendRedirect" href="#">
                 <div class="col-md-12">
                     <div class="card view overlay zoom">
-                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <img class="card-img-top img-fluid" src="img/profile2.jpg">
                         <div class="mask flex-center rgba-red-strong">
                             <h1 class="white-text" id="nameOfLegend"></h1>
                         </div>
@@ -109,7 +122,7 @@
                         </a>    
                     </div>
                 )
-            })
+            });
              
              return(
                 <div id="legend-container" class="caption text-center">
@@ -129,17 +142,12 @@
              );
          }
      })
-     
-     
-     
      </script>
 
-
-	<!-------- Start Grid Section --------->
 	<div class="container-fluid padding bg-dark">
 		<div class="row welcome text-center">
 			<div class="col-12">
-                <h3 class="heading white-text">"...brez vode ni vodke..."</h3>
+                <h3 class="heading white-text" style="font-weight: 200">"...toj tko Tinder za ideje..."</h3>
 				<div class="heading-underline"></div> 
 			</div>
 		</div>
@@ -151,9 +159,9 @@
             <div class="col-md-4">
                 <a href="/Luka%20Grasic">
                     <div class="card view overlay zoom">
-                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <img class="card-img-top img-fluid" src="img/profile1.jpg">
                         <div class="mask flex-center rgba-red-strong">
-                            <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
+                            <h1 id="nameOfLegend" class="white-text">David Golob</h1>
                         </div>
                     </div>
                 </a>
@@ -161,7 +169,7 @@
             <div class="col-md-4">
                 <a href="/Jus%20Lesjak">
                     <div class="card view overlay zoom">
-                        <img class="card-img-top img-fluid" src="img/jaka.png">
+                        <img class="card-img-top img-fluid" src="img/profile2.jpg">
                         <div class="mask flex-center rgba-red-strong">
                             <h1 id="nameOfLegend" class="white-text">Juš Lesjak</h1>
                         </div>
@@ -171,7 +179,7 @@
             <div class="col-md-4">
                 <a href="/Tjaz%20Erzen">
                     <div class="card view overlay zoom">
-                        <img class="card-img-top img-fluid" src="img/aljaz.png">
+                        <img class="card-img-top img-fluid" src="img/profile3.jpg">
                         <div class="mask flex-center rgba-red-strong">
                             <h1 id="nameOfLegend" class="white-text">Tjaž Eržen</h1>
                         </div>
@@ -181,9 +189,9 @@
             <div class="col-md-4">
                 <a href="/Janja%20Lesjak">
                     <div class="card view overlay zoom">
-                        <img class="card-img-top img-fluid" src="img/jaka.png">
+                        <img class="card-img-top img-fluid" src="img/profile4.jpg">
                         <div class="mask flex-center rgba-red-strong">
-                            <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                            <h1 id="nameOfLegend" class="white-text">Gašper Lotrič</h1>
                         </div>
                     </div>
                 </a>
@@ -191,7 +199,7 @@
             <div class="col-md-4">
                     <a href="/Luka%20Grasic">
                         <div class="card view overlay zoom">
-                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <img class="card-img-top img-fluid" src="img/profile5.jpg">
                             <div class="mask flex-center rgba-red-strong">
                                 <h1 id="nameOfLegend" class="white-text">Luka Grašič</h1>
                             </div>
@@ -201,9 +209,9 @@
                 <div class="col-md-4">
                     <a href="/Jus%20Lesjak">
                         <div class="card view overlay zoom">
-                            <img class="card-img-top img-fluid" src="img/jaka.png">
+                            <img class="card-img-top img-fluid" src="img/profile6.jpg">
                             <div class="mask flex-center rgba-red-strong">
-                                <h1 id="nameOfLegend" class="white-text">Juš Lesjak</h1>
+                                <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
                             </div>
                         </div>
                     </a>
@@ -211,9 +219,9 @@
                 <div class="col-md-4">
                     <a href="/Tjaz%20Erzen">
                         <div class="card view overlay zoom">
-                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <img class="card-img-top img-fluid" src="img/profile7.jpg">
                             <div class="mask flex-center rgba-red-strong">
-                                <h1 id="nameOfLegend" class="white-text">Tjaž Eržen</h1>
+                                <h1 id="nameOfLegend" class="white-text">Lana Grbić</h1>
                             </div>
                         </div>
                     </a>
@@ -221,9 +229,9 @@
                 <div class="col-md-4">
                     <a href="/Janja%20Lesjak">
                         <div class="card view overlay zoom">
-                            <img class="card-img-top img-fluid" src="img/jaka.png">
+                            <img class="card-img-top img-fluid" src="img/profile8.jpg">
                             <div class="mask flex-center rgba-red-strong">
-                                <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                                <h1 id="nameOfLegend" class="white-text">Aljaž Medič</h1>
                             </div>
                         </div>
                     </a>
@@ -231,9 +239,69 @@
                 <div class="col-md-4">
                     <a href="/Janja%20Lesjak">
                         <div class="card view overlay zoom">
-                            <img class="card-img-top img-fluid" src="img/aljaz.png">
+                            <img class="card-img-top img-fluid" src="img/profile9.jpg">
                             <div class="mask flex-center rgba-red-strong">
-                                <h1 id="nameOfLegend" class="white-text">Janja Lesjak</h1>
+                                <h1 id="nameOfLegend" class="white-text">Van Vizovišek</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile10.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Peter Letonja</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile11.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Maj Čufer</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile12.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Gal Kacin</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile13.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Lia Likar</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile14.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Neža Peternel</h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="/Janja%20Lesjak">
+                        <div class="card view overlay zoom">
+                            <img class="card-img-top img-fluid" src="img/profile15.jpg">
+                            <div class="mask flex-center rgba-red-strong">
+                                <h1 id="nameOfLegend" class="white-text">Urh Zupan</h1>
                             </div>
                         </div>
                     </a>

@@ -79,6 +79,10 @@ if(document.getElementById('newUserForm')) {
 function postUser() {
     event.preventDefault();
 
+    window.location.href="/Jus%20Lesjak";
+
+    return;
+
     // redirect se ne sme zgodit: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
     var formData = new FormData(this);
 

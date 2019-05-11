@@ -18,7 +18,9 @@ router.route('/ustvari')
 
 router.route('/:username')
   .get(controller.getOne)
-  .put(controller.put)
   .delete(controller.delete)
+
+router.route('/:username/uredi')
+    .get(controller.edit)
 
 module.exports = router;

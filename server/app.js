@@ -11,8 +11,12 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var ui = require('./ui/uiRoutes');
 
 // Connect to mongoose
-mongoose.connect(config.db.url);
+mongoose.connect(config.db.url, {
+    useMongoClient: true,
+});
 
+// Set up helmet
+app.use(helmet());
 // Set up middleware
 middleware(app);
 

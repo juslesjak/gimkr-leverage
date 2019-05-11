@@ -39,7 +39,7 @@ exports.postUser = function(req, res, next) {
 };
 
 // v temu filu das da posle PUT na api/users/Jus%20Lesjak
-exports.put = function(req, res, next) {
+exports.edit = function(req, res, next) {
     res.sendFile(path.join(__dirname + '/../../client/public/profileEdit.html'));
 };
 

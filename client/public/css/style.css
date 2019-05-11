@@ -16,6 +16,25 @@
 
 }
 
+div.md-form.mt-0.col-sm-3 {
+    margin-left: 37%;
+    margin-bottom: 0rem;
+}
+
+input.form-control.search {
+    color: white;
+    height: 50px; 
+    font-size: 30px;
+}
+
+input.form-control.search::placeholder {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-weight: 100;
+
+}
+
 /*--- Extra Bootstrap Column Padding --*/
 [class*="col-"] {
   padding: 1rem;

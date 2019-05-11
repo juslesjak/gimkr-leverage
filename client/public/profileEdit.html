@@ -6,34 +6,95 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 	<title>GHK</title>
-	<link rel="stylesheet" href="css/style_nuno.css" type="text/css">
+	<link rel="stylesheet" href="./../css/style_nuno.css" type="text/css">
      <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+     <!-- Bootstrap core CSS -->
+    <link href="./../css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="./../css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="./../css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <p>tole bo user edit page</p>
+      <!--- Start Navigation -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/brskaj">Brskaj</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Jus%20Lesjak/uredi">Uredi Profil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Odjava</a>
+                </li>
+            </ul>
+        </div>
+		</nav>
+    <!--- End Navigation -->
+
+    <div class="text-center col-12 center" style="padding-top: 8rem">
+        <div class="header">
+            <h1>Uredi profil</h1>
+        </div>
+            <form id="newUserForm" name="newUserForm">
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <!-- First name -->
+                        <input type="text" id="newFirst" name="first" class="form-control" value="Juš">
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <input type="text" id="newLast" name="last" class="form-control" value="Lesjak">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <!-- Categories -->
+                    <input type="text" id="newCategories" name="categories" class="form-control" value="organizacija">
+                </div>
+
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <!-- First name -->
+                        <input type="text" id="wishes" name="wishes" class="form-control" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus scelerisque, dictum nulla non, euismod ex. Nulla venenatis consequat nunc, sit amet faucibus lorem tincidunt quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;">
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <input type="text" id="nonWishes" name="nonWishes" class="form-control" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus scelerisque, dictum nulla non, euismod ex. Nulla venenatis consequat nunc, sit amet faucibus lorem tincidunt quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;">
+                    </div>
+                </div>
+                <div class="col-12">
+                        <!-- Categories -->
+                        <input type="text" id="portfolio" name="portfolio" class="form-control" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in lectus scelerisque, dictum nulla non, euismod ex. Nulla venenatis consequat nunc, sit amet faucibus lorem tincidunt quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;">
+                </div>
+
+                <input type="submit" class="btn" value="POSODOBI">
+            </form>
+        </div>
+
+    <!-- Default form register -->
 	<!-------- Start Contact Section --------->
 	<!-------- End Contact Section --------->
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
-    <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="./../js/jquery-3.4.0.min.js"></script>
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="./../js/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="./../js/mdb.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
-
+    <!-- Scripts -->
+    <script src="./../js/ui/ui.js"></script>
 
 </body>
 </html>

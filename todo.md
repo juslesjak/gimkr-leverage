@@ -208,4 +208,7 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
     -> brocen the home.html to start building react component
         
     
-    
+## 11 / 5 / 2019
+-> api dela
+-> do a demo with mock redirections and data
+-> deploy to AWS

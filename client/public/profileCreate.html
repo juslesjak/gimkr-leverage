@@ -19,9 +19,30 @@
 
 <body>
 
-    <div class="text-center col-12 center">
+      <!--- Start Navigation -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/brskaj">Brskaj</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Jus%20Lesjak/uredi">Uredi Profil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Odjava</a>
+                </li>
+            </ul>
+        </div>
+		</nav>
+    <!--- End Navigation -->
+
+    <div class="text-center col-12 center" style="padding-top: 8rem">
         <div class="header">
-            <h1>Ustvari profil</h1>
+            <h1>Pridruži se</h1>
         </div>
             <form id="newUserForm" name="newUserForm">
                 <div class="form-row mb-4">
@@ -38,7 +59,22 @@
                     <!-- Categories -->
                     <input type="text" id="newCategories" name="categories" class="form-control" placeholder="Področja">
                 </div>
-                <input type="submit" value="Ustvari profil">
+
+                <div class="form-row mb-4">
+                    <div class="col">
+                        <!-- First name -->
+                        <input type="text" id="wishes" name="wishes" class="form-control" placeholder="Kaj bi delal">
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <input type="text" id="nonWishes" name="nonWishes" class="form-control" placeholder="Česa nebi delal">
+                    </div>
+                </div>
+                <div class="col-12">
+                        <!-- Categories -->
+                        <input type="text" id="portfolio" name="portfolio" class="form-control" placeholder="Kaj si že naredil">
+                </div>
+                <input type="submit" class="btn" value="Ustvari profil">
             </form>
         </div>
 
