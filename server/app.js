@@ -5,13 +5,15 @@ var config = require('./config/config');
 var oauth = require('./auth/routes');
 var mongoose = require('mongoose');
 var middleware = require('./middleware/appMiddleware')
+var helmet = require('helmet');
 var config = require('./config/config');
 var passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var ui = require('./ui/uiRoutes');
 
 // Connect to mongoose
-mongoose.connect(config.db.url, {
+var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || 'mongodb://localhost/newdb';
+mongoose.connect(dbUrl, {
     useMongoClient: true,
 });
 

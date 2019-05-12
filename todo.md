@@ -204,11 +204,24 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 
 ## 8 / 5 / 2019
 -> formData not working, asked for help on Slack
--> incorporate react forntend (get David on board?)
+-> incorporate react forntend (get David on board?)✔️
     -> brocen the home.html to start building react component
         
     
 ## 11 / 5 / 2019
 -> api dela
--> do a demo with mock redirections and data
+-> do a demo with mock redirections and data✔️
 -> deploy to AWS
+
+## 12 / 5 / 2019
+-> deploy to heroku:✔️
+    -> connected to heroku db MONGODB_URI✔️
+        ->to je zdej shranjeno pod env variable na heroku dashboardu
+        -> k hocem povezat svoj node s to bao podatkov napišem process.env.MONGODB_URL
+    -> build stack (front and back)✔️
+        -> dokler ni Reacta, ni treba nč buildat.
+        -> sam Procfile z web: node index.js daš pa je vse good
+
+## 13 / 5 / 2019
+-> Add mobile-first features to frontend mock
+-> google oauth2

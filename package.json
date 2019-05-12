@@ -1,15 +1,20 @@
 {
-  "name": "MERN stack app GHK",
+  "name": "mern-stack-app-ghk",
   "version": "1.0.0",
-  "description": "",
+  "description": "MERN stack app",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": ""
+    "start": "node index.js",
+    "test": "",
+    "heroku-postbuild": "npm install --only=dev ./client && npm install ./server && npm install"
   },
-  "author": "",
+  "engines": {
+    "node": "8.12.0"
+  },
+  "author": "CDESLAYR",
   "license": "ISC",
   "dependencies": {
+    "client": "file:client",
     "express": "^4.13.1"
   },
   "devDependencies": {
