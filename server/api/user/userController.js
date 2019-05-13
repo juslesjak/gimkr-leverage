@@ -23,13 +23,6 @@ exports.params = function(req, res, next, name) {
     })
   }
 
-exports.test = function(req, res, next) {
-    console.log('recieved request ', req.body);
-
-    var data = req.user;
-    res.send(data);
-}
-
 exports.get = function(req, res, next) {
   User.find({})
   .populate({
@@ -96,5 +89,6 @@ exports.delete = function(req, res, next) {
     }
   });
 };
+
 
 

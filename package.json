@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "",
+    "dev": "nodemon index.js",
     "heroku-postbuild": "npm install --only=dev ./client && npm install ./server && npm install"
   },
   "engines": {
@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "client": "file:client",
-    "express": "^4.13.1"
+    "express": "^4.13.1",
+    "passport-google-oauth": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",

@@ -13,6 +13,5 @@ router.route('/:id')
   .put(controller.put)
   .delete(controller.delete)
 
-
 module.exports = router;
 

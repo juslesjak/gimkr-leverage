@@ -16,9 +16,10 @@
 
 }
 
-div.md-form.mt-0.col-sm-3 {
-    margin-left: 37%;
+div.md-form.mt-0 {
+    margin-left: 20%;
     margin-bottom: 0rem;
+    width: 60%;
 }
 
 input.form-control.search {

@@ -225,3 +225,26 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 ## 13 / 5 / 2019
 -> Add mobile-first features to frontend mock
 -> google oauth2
+    -> dela✔️
+    -> write findbygoogleid in povež vse da bo delal✔️
+    -> organizrej nazaj da nau vse na enmu app.js❌
+
+## 14 / 5 / 2019
+-> oauth
+    -> create new user works!!✔️
+        -> errors nontetheless:
+            -> no user found :( at /app/server/ui/uiController.js:14:14 , mjbi mam slab routing zarad /:username/neki
+            in mi auth potegne kokr da je /auth/ ubistvu en username✔️
+            -> zakva mi v console.log dvakrat izpiše user object❌
+    -> secure proper paths❌
+    -> correct organization❌
+-> create user virgin: choose fron categories list (responsive form) or add new category❌
+-> mobile ui sucks❌
+
+-> k dm sou stran /auth/google je direkt hittov callback function ker je to nastavlen kot callback. zj sm dodou dejnski oauth da vidm če zbuilda sploh, kličem ga še ne v callbacku toj delal. ✔️
+
+-> figure out kako bos routou ui in crud (user.delete pa update), k eni fuknejo vn svoj html (update), delete ga pa recmo sam zbrise
+
+-> sessioni me jebejo. brez sessionov dela. kuj k dam v /callback session: false stran, se ustav proces pr callbacku.
+
+

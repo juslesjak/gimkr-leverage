@@ -16,7 +16,3 @@ var CategorySchema = new Schema({
 })
 
 module.exports = mongoose.model('category', CategorySchema);
-
-
-// type: Schema.Types.ObjectId,
-// ref: 'user',

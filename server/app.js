@@ -1,58 +1,93 @@
 var express = require('express');
 var app = express();
-var api = require('./api/api');
-var config = require('./config/config');
-var oauth = require('./auth/routes');
-var mongoose = require('mongoose');
 var middleware = require('./middleware/appMiddleware')
-var helmet = require('helmet');
-var config = require('./config/config');
-var passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+var api = require('./api/api');
 var ui = require('./ui/uiRoutes');
+var config = require('./config/config');
+var auth = require('./auth/auth');
+var authRoutes = require('./auth/routes');
+var passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var mongoose = require('mongoose');
+var User = require('./api/user/userModel');
+const crypto = require('crypto');
+var multer = require('multer');
+var GridFsStorage = require('multer-gridfs-storage');
+var Grid = require('gridfs-stream');
+
 
 // Connect to mongoose
 var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || 'mongodb://localhost/newdb';
-mongoose.connect(dbUrl, {
+var conn = mongoose.connect(dbUrl, {
     useMongoClient: true,
 });
 
-// Set up helmet
-app.use(helmet());
+// Init gfs
+let gfs;
+
+conn.once('open', () => {
+    // Init stream
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('pictures'); // collection name
+});
+
+// Create storage engine
+const storage = new GridFsStorage({
+    url: dbUrl,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+            if (err) {
+            return reject(err);
+            }
+            const filename = buf.toString('hex') + path.extname(file.originalname);
+            const fileInfo = {
+            filename: filename,
+            bucketName: 'pictures'
+            };
+            resolve(fileInfo);
+        });
+        });
+    }
+});
+
+//  
+const upload = multer({ storage });
+
 // Set up middleware
-middleware(app);
+middleware.setMiddleware(app);
 
-// Serve static files
-app.use(express.static('client/public'));
-
-// Passport strategy. Dela samo na public IP Addressih
-passport.use('google', new GoogleStrategy({
-    clientID: config.oauth.google.clientID,
-    clientSecret: config.oauth.google.clientSecret,
-    callbackURL: 'http://localhost:3000/auth/google/callback', // a se ne klice to pol rekurzivno samga sebe
-  }, async (req, accessToken, refreshToken, profile, cb) => {
-
-    console.log('authenticated with google');
-    console.log(profile);
-      // Could get accessed in two ways:
-      // 1) When registering for the first time
-      // 2) When linking account to the existing one
-    
-    // Should have full user profile over here
-    console.log('profile', profile);
-    console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
-    return cb(null, profile);
-}));
-  
 // Set up the api
 app.use('/api', api);
-
-// sm gor prides s klikom na <a href='/oauth/google'>Log In with Google</a> iz UI
-app.use('/oauth', oauth);
 
 // Set up UI
 app.use('/', ui);
 
-module.exports = app;
+// Set up auth
+app.use('/auth', authRoutes);
 
+// Serve static files
+app.use(express.static('client/public'));
+
+var googleConfig = {
+    clientID: config.oauth.google.clientID,
+    clientSecret: config.oauth.google.clientSecret,
+    callbackURL: 'http://127.0.0.1:5000/auth/google/callback',
+    scope: ['profile', 'email'],
+}
+
+// Passport strategy
+passport.use('google', new GoogleStrategy(googleConfig, auth.googleStrategy));
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.findOne({'google.id':id})
+        .then(function(user) {
+            done(null, user)
+        })
+});
+
+module.exports = app;

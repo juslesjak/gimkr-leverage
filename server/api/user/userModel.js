@@ -8,11 +8,39 @@ var UserSchema = new Schema({
           required: true
         },
 
-        categories: {
+        categories: [{
           type: Schema.Types.ObjectId,
           ref: 'category',
-          required: true
-        },
+        }],
+
+        profileData: {
+            profilePhoto: {
+                type: String,
+            },
+            socialMedia: {
+                instagram: {
+                    type: String
+                },
+                facebook: {
+                    type: String
+                },
+                google: {
+                    type: String
+                },
+            },
+            bio: {
+                type: String
+            },
+            yesDo: {
+                type: String
+            },
+            noDo: {
+                type: String
+            },
+            alreadyDid: {
+                type: String
+            },
+        }
     },
 
     google: {
@@ -25,19 +53,6 @@ var UserSchema = new Schema({
         }
     }
 })
-
-// Check which method user used to sign in
-UserSchema.pre('save', async function(next) {
-  try {
-    if (this.method !== 'local') {
-      next();
-    }
-
-  } catch(error) {
-    next(error);
-  }
-} )
-
 module.exports = mongoose.model('user', UserSchema);
 
 // google.id dobis iz POST responsa na oauth/google

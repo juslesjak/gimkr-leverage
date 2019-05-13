@@ -2,12 +2,29 @@
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var passport = require('passport');
+var helmet = require('helmet');
+var methodOverride = require('method-override');
 
-var setMiddleware = function(app) {
+exports.setMiddleware = function(app) {
     app.use(morgan('dev'));
-    app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
+    app.use(require('body-parser').urlencoded({ extended: true }));
+    app.use(require('express-session')({
+        secret: 'blabla',
+        resave: false,
+        saveUninitialized: false
+        }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(cors());
+    app.use(helmet());
+    app.use(methodOverride('_method'));
 }
 
-module.exports = setMiddleware;
+exports.isLoggedIn = function(res, req, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect('/');
+}

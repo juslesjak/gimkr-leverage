@@ -10,8 +10,8 @@ exports.params = function(req, res, next, name) {
     })
         .then(function(user) {
       if (!user) {
-        console.log('no user found :(');
-        next(new Error('No user found with this name: ' + typeof(name)))
+        console.log('No user found :(');
+        next(new Error('Ni najdu userja s tem imenom: ' + name))
       } else {
         req.user = user;
         next();
@@ -43,16 +43,11 @@ exports.edit = function(req, res, next) {
     res.sendFile(path.join(__dirname + '/../../client/public/profileEdit.html'));
 };
 
-// delete user from db (nothing else needed because all static files are generated sproti React))
 exports.delete = function(req, res, next) {
-    res.send('kao deleted a user');
-//   var user = req.user;
+    console.log('kao deleted a user')
+}
 
-//   user.remove(function(err, removed) {
-//     if (err) {
-//       next(err);
-//     } else {
-//       res.json(removed);
-//     }
-//   });
-};
+exports.logout = function(req, res, next) {
+    req.logout();
+    res.redirect('/');
+}

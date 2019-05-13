@@ -7,4 +7,3 @@ var app = require('./server/app');
 app.listen(config.port);
 console.log('listening on http://localhost:' + config.port);
 
-
