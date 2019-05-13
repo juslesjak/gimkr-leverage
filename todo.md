@@ -225,3 +225,4 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 ## 13 / 5 / 2019
 -> Add mobile-first features to frontend mock
 -> google oauth2
+    ->

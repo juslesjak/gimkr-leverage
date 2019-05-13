@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var api = require('./api/api');
 var config = require('./config/config');
-var oauth = require('./auth/routes');
+var auth = require('./auth/routes');
 var mongoose = require('mongoose');
 var middleware = require('./middleware/appMiddleware')
 var helmet = require('helmet');
@@ -25,14 +25,15 @@ middleware(app);
 // Serve static files
 app.use(express.static('client/public'));
 
-// Passport strategy. Dela samo na public IP Addressih
+// Passport strategy
 passport.use('google', new GoogleStrategy({
     clientID: config.oauth.google.clientID,
     clientSecret: config.oauth.google.clientSecret,
-    callbackURL: 'http://localhost:3000/auth/google/callback', // a se ne klice to pol rekurzivno samga sebe
-  }, async (req, accessToken, refreshToken, profile, cb) => {
+    callbackURL: 'https://gimkrhussleclub.herokuapp.com/auth/google/callback',
+    scope: ['email'],
+  }, (accessToken, refreshToken, profile, callback) => {
 
-    console.log('authenticated with google');
+    console.log('authenticated with goGOOOGLEogle');
     console.log(profile);
       // Could get accessed in two ways:
       // 1) When registering for the first time
@@ -42,14 +43,14 @@ passport.use('google', new GoogleStrategy({
     console.log('profile', profile);
     console.log('accessToken', accessToken);
     console.log('refreshToken', refreshToken);
-    return cb(null, profile);
+    return callback(null, profile);
 }));
   
 // Set up the api
 app.use('/api', api);
 
-// sm gor prides s klikom na <a href='/oauth/google'>Log In with Google</a> iz UI
-app.use('/oauth', oauth);
+// Set up auth
+app.use('/auth', auth);
 
 // Set up UI
 app.use('/', ui);
