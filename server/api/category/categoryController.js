@@ -6,7 +6,7 @@ var _ = require('lodash');
 exports.param = function(req, res, next, name) {
   
   // localhost:3000/api/categories/programiranje
-  Category.findOne({"name" : name})
+  Category.findOne({"_id" : name})
   .populate('users')
   .then(function(category) {
     if(!category) {
