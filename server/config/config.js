@@ -9,7 +9,7 @@ var config = {
     oauth: {
         google: {
             clientID: '2285976511-mm4jb2mngdktvkq9g8l7n01n5m1m1qfp.apps.googleusercontent.com',
-            clientSecret: 'sWIJAinxYuySunMw6uVb_JV9'
+            clientSecret: 'rsMVVHn6xR_AS88TTIklixAd'
         }
     }
 

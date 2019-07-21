@@ -217,7 +217,7 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 -> deploy to heroku:✔️
     -> connected to heroku db MONGODB_URI✔️
         ->to je zdej shranjeno pod env variable na heroku dashboardu
-        -> k hocem povezat svoj node s to bao podatkov napišem process.env.MONGODB_URL
+        -> k hocem povezat svoj node s to bazo podatkov napišem process.env.MONGODB_URL
     -> build stack (front and back)✔️
         -> dokler ni Reacta, ni treba nč buildat.
         -> sam Procfile z web: node index.js daš pa je vse good
@@ -246,5 +246,25 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 -> figure out kako bos routou ui in crud (user.delete pa update), k eni fuknejo vn svoj html (update), delete ga pa recmo sam zbrise
 
 -> sessioni me jebejo. brez sessionov dela. kuj k dam v /callback session: false stran, se ustav proces pr callbacku.
+
+## 25 / 6 / 2019
+
+okeeej whaddup! 
+-> popravu sm API User model (zvečan), pršu nazaj in the game✔️
+-> google auth ne odpre dialoga sploh❌
+-> mongoDB slike ❌
+-> routing v browserju je s ščž, v postmanu pa s kodami
+
+## 19 / 7 / 2019
+
+-> cookies and sessions to lock down paths via tokens
+-> google auth TO NE DELA NA LOCALHOSTU!!!!!!!!
+-> mongoDB slike
+    -> gridFS na to se bom zj skoncentriru.
+    -> https://www.youtube.com/watch?v=3f5Q9wDePzY
+    -> https://www.youtube.com/watch?v=EVIGIcm7o2w
+    -> https://medium.com/@kavitanambissan/uploading-and-retrieving-a-file-from-gridfs-using-multer-958dfc9255e8
+-> zarad nekga neznanga razloga comment Xrtl+K ne dela. uporablam toggle line comment Ctrl + '.
+
 
 

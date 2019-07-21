@@ -2,9 +2,8 @@ var User = require('../api/user/userModel');
 var config = require('../config/config');
 var passport = require('passport');
 
-exports.googleStrategy = function(accessToken, refreshToken, profile, done) {
+exports.googleStrategy = function(accessToken, refreshToken, profile, done) { //accessToken, refreshToken, v argumentu
     console.log('AUTHENTICATED WITH GOOGLE');
-    console.log(profile);
     User.findOne({"google.id": profile.id})
         .then(
             function(user) {

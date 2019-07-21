@@ -15,8 +15,8 @@ router.route('/')
 router.route('/browse')
     .get(controller.getHome)
 
-router.route('/create')
-    .get(controller.postUser)
+router.route('/addProfile')
+    .get(controller.addProfile)
 
 router.route('/users/:username')
   .get(controller.getOne)

@@ -34,7 +34,7 @@ exports.getOne = function(req, res) {
 }
 
 // v temu filu das da posle POST na api/users
-exports.postUser = function(req, res, next) {
+exports.addProfile = function(req, res, next) {
     res.sendFile(path.join(__dirname + '/../../client/public/profileCreate.html'));
 };
 
