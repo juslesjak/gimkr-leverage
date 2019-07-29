@@ -68,36 +68,36 @@ function searchCategory() {
 
 // ADD NEW USER
 
-// check if on createUser page
-if(document.getElementById('newUserForm')) {
+// // check if on createUser page
+// if(document.getElementById('newUserForm')) {
 
-    // za submit rabs poslusat na <form id="nfjsrf">
-    var newUserForm = document.getElementById('newUserForm')
-    newUserForm.addEventListener('submit', postUser)
-}
+//     // za submit rabs poslusat na <form id="nfjsrf">
+//     var newUserForm = document.getElementById('newUserForm')
+//     newUserForm.addEventListener('submit', postUser)
+// }
 
-function postUser() {
-    event.preventDefault();
+// function postUser() {
+//     event.preventDefault();
 
-    window.location.href="/Jus%20Lesjak";
+//     window.location.href="/Jus%20Lesjak";
 
-    return;
+//     return;
 
-    // redirect se ne sme zgodit: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
-    var formData = new FormData(this);
+//     // redirect se ne sme zgodit: http://localhost:3000/ustvari?first=Jus&last=Lesjak&categories=e
+//     var formData = new FormData(this);
 
-    // model formData da bojo ustrezale data: formData
+//     // model formData da bojo ustrezale data: formData
 
-    var user = {
-        data: {
-            name: "user",
-            categories: "5ccddebfb94654349067fd04"
-        },
-        google: {
-            id: 'useruser', //formData.google.id,
-            email: 'user.email43@gmail.com' //formData.google.email
-        }
-    }
+//     var user = {
+//         data: {
+//             name: "user",
+//             categories: "5ccddebfb94654349067fd04"
+//         },
+//         google: {
+//             id: 'useruser', //formData.google.id,
+//             email: 'user.email43@gmail.com' //formData.google.email
+//         }
+//     }
     
     // var request = new XMLHttpRequest();
     // request.open("POST", "http://localhost:3000/api/users/test");
@@ -106,7 +106,7 @@ function postUser() {
     
     // $.post('/api/users', user)
 
-}
+//}
 
 
 

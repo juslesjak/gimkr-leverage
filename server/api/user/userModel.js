@@ -15,7 +15,8 @@ var UserSchema = new Schema({
 
         profileData: {
             profilePhoto: {
-                type: String,
+                type: Schema.Types.ObjectId, //isto kokr s kategorijami se ke s slikami zgodi
+                ref: 'picture'
             },
             socialMedia: {
                 instagram: {
@@ -39,7 +40,11 @@ var UserSchema = new Schema({
             },
             alreadyDid: {
                 type: String
-            },
+            }
+            // alreadyDid: [{
+            //     type: Schema.Types.ObjectId,
+            //     ref: 'picture'
+            // }],
         }
     },
 

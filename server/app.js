@@ -18,7 +18,7 @@ var path = require('path');
 
 
 // Connect to mongoose
-var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || 'mongodb://Yux:b3r59p89bctkifvkfam6rl6dqh@ds155606.mlab.com:55606/heroku_4f1mdk76';
+var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || config.dbConnString;
 var conn = mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useMongoClient: true,
@@ -54,7 +54,7 @@ const storage = new GridFsStorage({
 });
 
 // to je zdej middleware k uploada na database ob POST requestu na /upload (oz kamorkol se bo postou createUpdate user)
-const upload = multer({ storage: storage });
+var upload = multer({ storage: storage });
 
 // Set up middleware
 middleware.setMiddleware(app);
@@ -62,14 +62,47 @@ middleware.setMiddleware(app);
 // Set up the api
 app.use('/api', api);
 
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/uploadFile', upload.single('file'), (req, res) => { //upload more bit kot del middlewara ne pa znotrej funkcije.
     res.json({file: req.file});
+});
+app.delete('/files/:filename', (req, res) => {
+    gfs.exist({ length: req.params.filename }, function (err, file) {
+        console.log(req.params.filename);
+        if (err || !file) {
+            res.send('File Not Found');
+        } else {
+            gfs.remove({ length: req.params.filename }, function (err) {
+                if (err) res.send(err);
+                res.send('File Deleted');
+            });
+        }
+    });
 });
 
 // Set up UI
 app.use('/', ui);
 
-app.get('/image/:filename', (req, res) => {
+app.get('/images/:filename', (req, res) => {
+    gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+        if (!file || file.length == 0) {
+            return res.status(404).json({
+                err: 'No file exists'
+            });
+        }
+
+        if (file.contentType === 'image/jpeg' || file.contentType === 'img/png') {
+            // Read output to browser
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        } else {
+            res.status(404).json({
+                err: 'Not an image'
+            });
+        };
+    })
+})
+
+app.delete('/images/:filename', (req, res) => {
     gfs.files.findOne({filename: req.params.filename}, (err, file) => {
         if (!file || file.length == 0) {
             return res.status(404).json({
@@ -98,7 +131,7 @@ app.use(express.static('client/public'));
 var googleConfig = {
     clientID: config.oauth.google.clientID,
     clientSecret: config.oauth.google.clientSecret,
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'https://gimkrhussleclub.herokuapp.com/auth/google/callback',
     scope: ['profile', 'email'],
 }
 

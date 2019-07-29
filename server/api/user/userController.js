@@ -40,14 +40,14 @@ exports.getOne = function(req, res, next) {
   res.json(user);
 }
 
-exports.post = function(req, res, next) {
+exports.post = function(req, res, next) { // v req.file je slika
   var newUser = new User(req.body)
 
   newUser.save(function(err, savedUser) {
     if (err) {
       next(err);
     } else {
-      res.json(savedUser);
+      res.json(savedUser, {file: req.file});
     }
   });
 };

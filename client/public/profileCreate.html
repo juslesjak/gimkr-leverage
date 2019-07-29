@@ -43,46 +43,44 @@
     <div class="text-center col-12 center" style="padding-top: 8rem">
         <div class="header">
             <h1>Pridruži se</h1>
+
+        <p>First of all, show us the face! Ko uploadaš sliko se odklene še ostali del ustvarjanja profila.</p>
+
+        <form action="/uploadFile" method="POST" enctype="multipart/form-data">
+            <div class="custom-file mb-3">
+                <input type="file" name="file" id="file" class="custom-file-input">
+                <label for="file" class="custom-file-label">Choose File</label>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary btn-block">
+        </form>
+
         </div>
-            <form id="newUserForm" name="newUserForm">
+            <form action="/api/users" method="POST" ecntype="multipart/form-data" id="newUserForm" name="newUserForm">
                 <div class="form-row mb-4">
-                    <div class="col">
-                        <!-- First name -->
-                        <input type="text" id="newFirst" name="first" class="form-control" placeholder="Ime">
+                    <div class="col" style="background-color: grey;">
+                        <input type="text" id="newFirst" name="first" class="form-control" placeholder="Ime" readonly>
                     </div>
                     <div class="col">
-                        <!-- Last name -->
                         <input type="text" id="newLast" name="last" class="form-control" placeholder="Priimek">
                     </div>
                 </div>
                 <div class="col-12">
-                    <!-- Categories -->
                     <input type="text" id="newCategories" name="categories" class="form-control" placeholder="Področja">
                 </div>
 
                 <div class="form-row mb-4">
                     <div class="col">
-                        <!-- First name -->
                         <input type="text" id="wishes" name="wishes" class="form-control" placeholder="Kaj bi delal">
                     </div>
                     <div class="col">
-                        <!-- Last name -->
                         <input type="text" id="nonWishes" name="nonWishes" class="form-control" placeholder="Česa nebi delal">
                     </div>
                 </div>
                 <div class="col-12">
-                        <!-- Categories -->
                         <input type="text" id="portfolio" name="portfolio" class="form-control" placeholder="Kaj si že naredil">
                 </div>
-                <input type="submit" class="btn" value="Ustvari profil">
-            </form>
 
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <div class="custom-file mb-3">
-                    <input type="file" name="file" id="file" class="custom-file-input">
-                    <label for="file" class="custom-file-label">Choose File</label>
-                </div>
-                <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                <input type="submit" class="btn" value="Ustvari profil">
             </form>
         </div>
 

@@ -227,7 +227,7 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
 -> google oauth2
     -> dela✔️
     -> write findbygoogleid in povež vse da bo delal✔️
-    -> organizrej nazaj da nau vse na enmu app.js❌
+    -> organizrej nazaj da nau vse na enmu app.js✔️
 
 ## 14 / 5 / 2019
 -> oauth
@@ -235,24 +235,24 @@ upoštevou kokr da je uncommentan! zato ga je vedno beležu kokr da je "null", t
         -> errors nontetheless:
             -> no user found :( at /app/server/ui/uiController.js:14:14 , mjbi mam slab routing zarad /:username/neki
             in mi auth potegne kokr da je /auth/ ubistvu en username✔️
-            -> zakva mi v console.log dvakrat izpiše user object❌
+            -> zakva mi v console.log dvakrat izpiše user object
     -> secure proper paths❌
-    -> correct organization❌
+    -> correct organization✔️
 -> create user virgin: choose fron categories list (responsive form) or add new category❌
--> mobile ui sucks❌
+-> mobile ui sucks✔️
 
 -> k dm sou stran /auth/google je direkt hittov callback function ker je to nastavlen kot callback. zj sm dodou dejnski oauth da vidm če zbuilda sploh, kličem ga še ne v callbacku toj delal. ✔️
 
 -> figure out kako bos routou ui in crud (user.delete pa update), k eni fuknejo vn svoj html (update), delete ga pa recmo sam zbrise
 
--> sessioni me jebejo. brez sessionov dela. kuj k dam v /callback session: false stran, se ustav proces pr callbacku.
+-> sessioni me jebejo. brez sessionov dela. kuj k dam v /callback session: false stran, se ustav proces pr callbacku. (mejbi je blo to zato ker je biu v callbacku nastavlen callbackurl na localhost/auth/google, kar pa ne dela).
 
 ## 25 / 6 / 2019
 
 okeeej whaddup! 
 -> popravu sm API User model (zvečan), pršu nazaj in the game✔️
--> google auth ne odpre dialoga sploh❌
--> mongoDB slike ❌
+-> google auth ne odpre dialoga sploh✔️
+-> mongoDB slike ✔️
 -> routing v browserju je s ščž, v postmanu pa s kodami
 
 ## 19 / 7 / 2019
@@ -266,5 +266,33 @@ okeeej whaddup!
     -> https://medium.com/@kavitanambissan/uploading-and-retrieving-a-file-from-gridfs-using-multer-958dfc9255e8
 -> zarad nekga neznanga razloga comment Xrtl+K ne dela. uporablam toggle line comment Ctrl + '.
 
+## 21 / 7 / 19
 
+-> gridFS dela ampak rabm zrihtat zmedo z bazami podatkov. Rabm naceta pa ta tutorial https://www.youtube.com/watch?v=3f5Q9wDePzY
+    -> gridFS je up and running. zdej rabl ta middleware prestavt iz app.js globok notr v nested routing, sam nevem kako.
+    -> **BATABASE clarifications** k je production nekak zazna in uporab MONGOLAB_CHARCOAL_URI k je v Heroku Dashboardu nastavlen kot tale
+    mLabov database: https://www.mlab.com/databases/heroku_4f1mdk76#collections. do tega najlazi dostopas prek Heroku dashboarda.
+    -> k pa ni production, sm pa do zdej uporabli lokaln DB (newDb ker sm skos rabu laufat mongod), od zj naprej bom pa tut uporablu unga na mLabu.
+    -> zato rabm na mLabu registrirat DB userja. ime: Yux. password: b3r59p89bctkifvkfam6rl6dqh
+    -> ok lepo zdej je vse povezan z mLab bazo podatkov. zjpa GridFS.✔️
 
+    -> gridFS dela in na mLabu kaže kako uploadam file. GOOOOD ✔️
+    -> userModel profilepicture ma filename od te uploadane.
+        -> portfolio ma pa array filenamov. 
+        -> a jih frontend pol z gfs sparsa al jih js zapišem v bytni obliki na API?❌ kapa to da se slike shranjo v /img/ folder na serverju?
+
+-> Lia je on board za design, zdele začne delat.✔️
+-> **SECURITY** config file bi pomoje mogu bit na kompu shranjen, ne pa pushan na github z vsemi passwordi pa to.
+
+## 22 / 7 / 19
+
+-> gridFS kako je z brisanjem slik? k se user updata alpa zbriše.
+    -> v fileInfo se doda od userja _id, pa v user.profileData se doda filename od slike
+    -> najprej se uploada sliko in dobi nazaj njen __id. pol se ustvari userja in v frontendu (skrito) v njegov profilePhoto: zapise ta id. in se shrani userja.
+    -> vse to je lah na istem pagu. spodnji del (createUser) se osvetli šele ko pošlje sliko in se uspešno nastav. 
+        -> prvi del pošlje POST request na /uploadFile k ga shran pa vrne njegov ID. tega bo frontend pol zapisou kot njegov profilePhoto.
+    
+
+## 29 / 7 / 19
+-> googlecallbackUrl je biu nastavlen na localhost/auth/google/callback :(( rookie
+-> gridfs crud (delete, )
