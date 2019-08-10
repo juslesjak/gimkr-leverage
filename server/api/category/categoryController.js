@@ -2,18 +2,17 @@ var Category = require('./categoryModel');
 var _ = require('lodash');
 
 // finds the category and attaches it to res. object 
-// if the :name param was given in query
-exports.param = function(req, res, next, name) {
+// if the :id param was given in query
+exports.param = function(req, res, next, id) {
   
-  // localhost:3000/api/categories/programiranje
-  Category.findOne({"_id" : name})
+  // localhost:3000/api/categories/5d4dd804dc311c314c809f46
+  Category.findOne({"_id" : id})
   .populate('users')
   .then(function(category) {
     if(!category) {
-    next(new Error('No category found with this name', name));
+    next(new Error('No category found with this id', id));
     } else {
     req.category = category;
-    console.log("TOLE JE DOC K GA DOBIM IZ FIND() " + category);
     next();
     }
   }, function(err) {

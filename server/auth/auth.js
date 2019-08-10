@@ -4,6 +4,11 @@ var passport = require('passport');
 
 exports.googleStrategy = function(accessToken, refreshToken, profile, done) {
     console.log('AUTHENTICATED WITH GOOGLE');
+    console.log(accessToken);
+    console.log(refreshToken);
+    console.log(profile);
+
+
     User.findOne({"google.id": profile.id})
         .then(
             function(user) {

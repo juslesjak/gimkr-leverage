@@ -5,9 +5,9 @@ exports.google = function(req, res, next) {
     console.log('before authentication handler');
     passport.authenticate('google', { 
         scope: ['profile', 'email'], 
+        session: false
     })
     console.log('after authentication handler');
-
 };
 
 exports.googleCallback = function(req, res, next) {

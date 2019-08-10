@@ -295,4 +295,21 @@ okeeej whaddup!
 
 ## 29 / 7 / 19
 -> googlecallbackUrl je biu nastavlen na localhost/auth/google/callback :(( rookie
--> gridfs crud (delete, )
+    -> GOOGLEAUTH DELA TUT NA LOCALHOSTU!✔️✔️
+    -> SCENA JE DA RABS ACCESSTOKEN POSILJAT, tok dolg casa nism biu na temu da sm pozabu cist. start fresh.✔️
+
+    -> zdej mi dela google oauth. v callbacku k se v DB ustvraja nov user mi ga ne nardi, pride pa notr do 'creating new user'✔️
+    -> problem je biu v google.callback funkciji, sezmeram je tm problem.❌
+-> gridfs crud (delete)❌
+
+## 30 / 7 / 19
+-> userConstroller 43: req.file??❌
+-> DB
+    -> createConnection vs connect (rabm prvo da dela .once, morm spremenit kodo. mam že tutorial ready.)
+-> gridFS delete: koda je, delal bo k zgorn problem rešm.
+
+## 31 / 7 / 19
+-> createConnection
+    -> vse kar rabm je da pri ustvarjanju Modelov namest mongoose.model('user', UserSchema) uporabm db.model(..) 
+    -> ta db je mongoose.createConnection(...)
+    -> zdej rabm sam še 'db' spravt v file UserModel.js, k drgač v app.js mi dela ampak model pa ustvarm v UserModel.js tkoda rabm tm

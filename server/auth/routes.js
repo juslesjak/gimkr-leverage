@@ -1,11 +1,17 @@
 var router = require('express').Router();
 var controller = require('./controller');
+var passport = require('passport');
 
-// check with Password.js
-router.route('/google')
-    .get(controller.google);
 
-router.route('/google/callback')
-    .get(controller.googleCallback);
+// auth with google+
+router.get('/google', passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    session: false
+}));
+
+// callback route for google to redirect to
+router.get('/google/callback', passport.authenticate('google'), (req, res) => {
+    res.redirect('/browse');
+});
 
 module.exports = router;

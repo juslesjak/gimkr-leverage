@@ -3,58 +3,134 @@ var app = express();
 var middleware = require('./middleware/appMiddleware')
 var api = require('./api/api');
 var ui = require('./ui/uiRoutes');
-var config = require('./config/config');
-var auth = require('./auth/auth');
-var authRoutes = require('./auth/routes');
+var keys = require('./config/keys');
 var passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+require('./config/passport-setup');
+var authRoutes = require('./auth/routes');
 var mongoose = require('mongoose');
-var User = require('./api/user/userModel');
-const crypto = require('crypto');
-var multer = require('multer');
 var GridFsStorage = require('multer-gridfs-storage');
 var Grid = require('gridfs-stream');
+var methodOverride = require('method-override');
+Grid.mongo = mongoose.mongo;
+
+const crypto = require('crypto');
+var multer = require('multer');
 var path = require('path');
 
-
 // Connect to mongoose
-var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || config.dbConnString;
-var conn = mongoose.connect(dbUrl, {
-    useNewUrlParser: true,
-    useMongoClient: true,
-});
+var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || keys.mongodb.dbURL;
+mongoose.connect(dbUrl, { useNewUrlParser: true });
+var conn = mongoose.connection;
 
-// Init gfs
-let gfs;
+conn.once('open', function () {
 
-conn.once('open', () => {
     // Init stream
-    gfs = Grid(conn.db, mongoose.mongo);
+    var gfs = Grid(conn.db);
     gfs.collection('pictures'); // collection name
-});
 
-// Create storage engine
-const storage = new GridFsStorage({
-    url: dbUrl,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-            if (err) {
-            return reject(err);
+    // Create storage engine
+    const storage = new GridFsStorage({
+        url: dbUrl,
+        file: (req, file) => {
+            return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename = buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'pictures'
+                };
+                resolve(fileInfo);
+            });
+            });
+        }
+    });
+
+    var upload = multer({ storage: storage });
+
+    app.post('/images', upload.single('file'), (req, res) => { //upload more bit kot del middlewara ne pa znotrej funkcije.
+        res.json({file: req.file});
+    });
+
+    app.get('/images/all', (req, res) => {
+        gfs.files.find().toArray((err, files) => {
+            // check if files
+            if (!files || files.length === 0) {
+                return res.status(404).json({
+                    err: 'No files exist'
+                });
             }
-            const filename = buf.toString('hex') + path.extname(file.originalname);
-            const fileInfo = {
-            filename: filename,
-            bucketName: 'pictures'
+
+            //files exist
+            return res.json(files);
+        })
+    })
+
+    app.get('/images/all/:filename', (req, res) => {
+        gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+            console.log('filename PARAM', req.params.filename);
+
+            // check if files
+            if (!file || file.length === 0) {
+                return res.status(404).json({
+                    err: 'No file exist'
+                });
+            }
+
+            //files exist
+            return res.json(file);
+        })
+    })
+
+    app.get('/images/:filename', (req, res) => {
+        gfs.files.findOne({ filename: req.params.filename}, (err, file) => {
+            console.log('ID PARAM', req.params.filename);
+            if (!file || file.length === 0) {
+                return res.status(404).json({
+                    err: 'No file exists'
+                });
+            }
+
+            if (file.contentType === 'image/jpeg' || file.contentType === 'image/jpg' || file.contentType === 'image/png' || file.contentType === 'img/png') {
+                // Read output to browser
+                const readstream = gfs.createReadStream(file.filename);
+                res.header("Content-Type", "image/png");
+                readstream.pipe(res);
+            } else {
+                res.status(404).json({
+                    err: 'Not an image'
+                });
             };
-            resolve(fileInfo);
+        })
+    })
+
+    app.delete('/images/:filename', (req, res) => {
+        gfs.remove({ filename: req.params.filename, root: 'pictures' }, (err, file) => {
+            console.log(req.params.filename);
+            if (err) {
+                return res.status(404).json({err: err});
+            }
+            res.json(file);
         });
-        });
-    }
+    });
+
+    // // Get file information(File Meta Data) from MongoDB
+    // app.get('/meta', function (req, res) {
+    //     gfs.exist({ filename: db_filename }, function (err, file) {
+    //         if (err || !file) {
+    //             res.send('File Not Found');
+    //         } else {
+    //             gfs.files.find({ filename: db_filename }).toArray(function (err, files) {
+    //                 if (err) res.send(err);
+    //                 res.send(files);
+    //             });
+    //         }
+    //     });
+    // });
 });
 
-// to je zdej middleware k uploada na database ob POST requestu na /upload (oz kamorkol se bo postou createUpdate user)
-var upload = multer({ storage: storage });
 
 // Set up middleware
 middleware.setMiddleware(app);
@@ -62,91 +138,14 @@ middleware.setMiddleware(app);
 // Set up the api
 app.use('/api', api);
 
-app.post('/uploadFile', upload.single('file'), (req, res) => { //upload more bit kot del middlewara ne pa znotrej funkcije.
-    res.json({file: req.file});
-});
-app.delete('/files/:filename', (req, res) => {
-    gfs.exist({ length: req.params.filename }, function (err, file) {
-        console.log(req.params.filename);
-        if (err || !file) {
-            res.send('File Not Found');
-        } else {
-            gfs.remove({ length: req.params.filename }, function (err) {
-                if (err) res.send(err);
-                res.send('File Deleted');
-            });
-        }
-    });
-});
-
 // Set up UI
 app.use('/', ui);
 
-app.get('/images/:filename', (req, res) => {
-    gfs.files.findOne({filename: req.params.filename}, (err, file) => {
-        if (!file || file.length == 0) {
-            return res.status(404).json({
-                err: 'No file exists'
-            });
-        }
-
-        if (file.contentType === 'image/jpeg' || file.contentType === 'img/png') {
-            // Read output to browser
-            const readstream = gfs.createReadStream(file.filename);
-            readstream.pipe(res);
-        } else {
-            res.status(404).json({
-                err: 'Not an image'
-            });
-        };
-    })
-})
-
-app.delete('/images/:filename', (req, res) => {
-    gfs.files.findOne({filename: req.params.filename}, (err, file) => {
-        if (!file || file.length == 0) {
-            return res.status(404).json({
-                err: 'No file exists'
-            });
-        }
-
-        if (file.contentType === 'image/jpeg' || file.contentType === 'img/png') {
-            // Read output to browser
-            const readstream = gfs.createReadStream(file.filename);
-            readstream.pipe(res);
-        } else {
-            res.status(404).json({
-                err: 'Not an image'
-            });
-        };
-    })
-})
-
 // Set up auth
+app.use(passport.initialize());
 app.use('/auth', authRoutes);
 
 // Serve static files
 app.use(express.static('client/public'));
-
-var googleConfig = {
-    clientID: config.oauth.google.clientID,
-    clientSecret: config.oauth.google.clientSecret,
-    callbackURL: 'https://gimkrhussleclub.herokuapp.com/auth/google/callback',
-    scope: ['profile', 'email'],
-}
-
-// Passport strategy
-passport.use('google', new GoogleStrategy(googleConfig, auth.googleStrategy));
-
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.findOne({'google.id':id})
-        .then(function(user) {
-            done(null, user)
-        })
-});
 
 module.exports = app;
