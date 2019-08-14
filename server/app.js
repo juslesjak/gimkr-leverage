@@ -106,6 +106,8 @@ conn.once('open', function () {
         })
     })
 
+    app.put('/images/:filename')
+
     app.delete('/images/:filename', (req, res) => {
         gfs.remove({ filename: req.params.filename, root: 'pictures' }, (err, file) => {
             console.log(req.params.filename);

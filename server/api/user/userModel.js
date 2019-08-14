@@ -16,9 +16,8 @@ var User = new Schema({
           ref: 'category',
         }],
 
-        profilePhoto: {
-            type: Schema.Types.ObjectId, //isto kokr s kategorijami se ke s slikami zgodi
-            ref: 'picture'
+        profilePicture: {
+            type: String
         },
         
         socialMedia: [{
