@@ -3,7 +3,7 @@ var app = express();
 var middleware = require('./middleware/appMiddleware')
 var api = require('./api/api');
 var ui = require('./ui/uiRoutes');
-var keys = require('./config/keys');
+//var keys = require('./config/keys');
 var passport = require('passport');
 require('./config/passport-setup');
 var authRoutes = require('./auth/routes');
@@ -17,7 +17,7 @@ var multer = require('multer');
 var path = require('path');
 
 // Connect to mongoose
-var dbUrl = process.env.MONGOLAB_CHARCOAL_URI || keys.mongodb.dbURL;
+var dbUrl = process.env.MONGOLAB_CHARCOAL_URI //|| keys.mongodb.dbURL;
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 var conn = mongoose.connection;
 
