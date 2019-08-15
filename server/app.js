@@ -3,7 +3,7 @@ var app = express();
 var middleware = require('./middleware/appMiddleware')
 var api = require('./api/api');
 var ui = require('./ui/uiRoutes');
-var keys = require('./config/keys');
+//var keys = require('./config/keys');
 var passport = require('passport');
 require('./config/passport-setup');
 var authRoutes = require('./auth/routes');
