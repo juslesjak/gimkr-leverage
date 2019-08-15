@@ -310,6 +310,13 @@ okeeej whaddup!
 
 ## 31 / 7 / 19
 -> createConnection
-    -> vse kar rabm je da pri ustvarjanju Modelov namest mongoose.model('user', UserSchema) uporabm db.model(..) 
+    -> vse kar rabm je da pri ustvarjanju Modelov namest mongoose.model('user', UserSchema) uporabm db.model(..) ❌❌
+    -> **TO SPLOH NI RES, dela normal tut z mongoose.connect. sam od začetka sm šu vse delat pa je good!**
     -> ta db je mongoose.createConnection(...)
     -> zdej rabm sam še 'db' spravt v file UserModel.js, k drgač v app.js mi dela ampak model pa ustvarm v UserModel.js tkoda rabm tm
+
+## 15 / 8 / 19
+-> everthing dela. ✔️
+-> credentials crash: keysi pomembni k nesmejo jit na github so bli v .gitignore. locally je delal, na heroku pa ne ker jih na githubu ni blo. Zaneat sm jih exposov, k mi Nace napiše kako nej ravnam z njimi pol bom refreshu vse to in naredu proper.✔️
+-> google auth redirecta na httP:/gimkrhussleclub/auth/google/callback, čeprov bi mogu na https. začasno bom nastavi v Google API console da je kul tut http:/gimeagn... tko me vedno redirekta na https:google/auth, zato stvar ne delajo.
+-> karkol se dela callbackov na https:google/auth, je vse 500 internal server error. TODO❌

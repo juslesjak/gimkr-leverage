@@ -3,14 +3,13 @@ var app = express();
 var middleware = require('./middleware/appMiddleware')
 var api = require('./api/api');
 var ui = require('./ui/uiRoutes');
-//var keys = require('./config/keys');
+var keys = require('./config/keys');
 var passport = require('passport');
 require('./config/passport-setup');
 var authRoutes = require('./auth/routes');
 var mongoose = require('mongoose');
 var GridFsStorage = require('multer-gridfs-storage');
 var Grid = require('gridfs-stream');
-var methodOverride = require('method-override');
 Grid.mongo = mongoose.mongo;
 
 const crypto = require('crypto');

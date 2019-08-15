@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-//const keys = require('./keys');
+const keys = require('./keys');
 var User = require('../api/user/userModel');
 
 
@@ -21,15 +21,17 @@ passport.use(
                     function(user) {
                         if(user) {
                             // Return existing user
-                            console.log('User already exists');
+                            console.log('User already exists', profile);
                             done(null, user);
                             
                         } else {
+
                             // Create new user
                             var email = profile.emails[0].value;
                             var newUser = {
                                 data: {
-                                    name: profile.displayName,
+                                    firstName: profile.name.givenName,
+                                    lastName: profile.name.familyName,
                                     categories: [],
                                 },
                                 google: {
