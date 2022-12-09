@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "client": "file:client",
-    "express": "^4.13.1",
+    "express": "^4.17.3",
     "passport-google-oauth": "^2.0.0"
   },
   "devDependencies": {
